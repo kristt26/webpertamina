@@ -1,0 +1,32 @@
+.app-header {
+    background-color: #fff !important;
+}
+
+.app-sidebar__toggle {
+    color: #000 !important;
+}
+
+.app-nav__item {
+    color: #000 !important;
+}
+
+.app-header__logo {
+    color: #000 !important;
+    background-color: #fff;
+    font-family: 'Niconne';
+    padding: 0px !important;
+    font-size: 26px;
+    font-weight: 0px !important;
+    line-height: 30px;
+}
+
+.widget-fontvalue {
+    font-size: 2rem;
+}
+
+.img-pictures {
+    border-radius: 150px;
+    background: linear-gradient(145deg, #e1e1e1, #ffffff);
+    box-shadow: 19px 19px 37px #dcdcdc, -19px -19px 37px #ffffff;
+    width: 100%;
+}
