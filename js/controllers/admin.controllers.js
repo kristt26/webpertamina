@@ -3,7 +3,11 @@ angular
     .controller('adminController', adminController)
     .controller('adminDaftarUserController', adminDaftarUserController)
     .controller('adminManajemenUserController', adminManajemenUserController)
-    .controller('adminListPemeriksaanController', adminListPemeriksaanController);
+    .controller('adminListPemeriksaanController', adminListPemeriksaanController)
+    .controller('admintambahlistpemeriksaanController', admintambahlistpemeriksaanController)
+    .controller('adminpersetujuankim', adminpersetujuankim)
+    .controller('adminkim', adminkim)
+    .controller('adminhistoritruk', adminhistoritruk);
 
 function adminController($scope) {
 
@@ -18,5 +22,26 @@ function adminManajemenUserController($scope) {
 }
 
 function adminListPemeriksaanController($scope) {
+    $scope.Title = 'List Pemeriksaan'
+
+}
+
+function admintambahlistpemeriksaanController($scope) {
+    $scope.Title = 'Tambah List Pemeriksaan'
+
+}
+
+function adminpersetujuankim($scope) {
+    $scope.Title = 'Persetujuan KIM'
+
+}
+
+function adminkim($scope) {
+    $scope.Title = 'KIM'
+
+}
+
+function adminhistoritruk($scope) {
+    $scope.Title = 'KIM'
 
 }
