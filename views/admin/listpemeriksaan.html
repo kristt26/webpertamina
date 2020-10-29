@@ -1,0 +1,49 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fas fa-table mr-1"></i> List Pemeriksaan
+                </div>
+                <div>
+                    <a ui-sref="tambahlistpemeriksaan" class="btn btn-success btn-sm"><i class="fa pulseWarningIns"></i>Tambah</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover ; text-justify" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Kelengkapan</th>
+                            <th scope="col">Detail</th>
+                            <th scope="col">Penjelasan</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                1
+                            </th>
+                            <td>STNK</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>
+                                <a class="btn btn-warning btn-sm"><i class="fa fc-basic-view"></i> </a>
+                                <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
+                                <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- <?php endforeach; ?> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

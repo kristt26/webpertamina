@@ -1,5 +1,5 @@
 angular.module('admin.router', ['ui.router'])
-    .config(function ($stateProvider) {
+    .config(function($stateProvider) {
         var helloState = {
             name: 'hello',
             url: '/hello',
@@ -24,8 +24,36 @@ angular.module('admin.router', ['ui.router'])
             controller: 'adminListPemeriksaanController',
             templateUrl: './views/admin/listpemeriksaan.html'
         }
+        var tambahlistpemeriksaan = {
+            name: 'tambahlistpemeriksaan',
+            url: '/tambahlistpemeriksaan',
+            controller: 'admintambahlistpemeriksaanController',
+            templateUrl: './views/admin/tambahlistpemeriksaan.html'
+        }
+        var persetujuankim = {
+            name: 'persetujuankim',
+            url: '/persetujuankim',
+            controller: 'adminpersetujuankimController',
+            templateUrl: './views/admin/persetujuankim.html'
+        }
+        var kim = {
+            name: 'kim',
+            url: '/kim',
+            controller: 'kimController',
+            templateUrl: './views/admin/kim.html'
+        }
+        var historitruk = {
+            name: 'historitruk',
+            url: '/historitruk',
+            controller: 'historitrukController',
+            templateUrl: './views/admin/historitruk.html'
+        }
         $stateProvider.state(helloState);
         $stateProvider.state(daftaruserstate);
         $stateProvider.state(manajemenuserstate);
         $stateProvider.state(listpemeriksaanstate);
+        $stateProvider.state(tambahlistpemeriksaan);
+        $stateProvider.state(persetujuankim);
+        $stateProvider.state(kim);
+        $stateProvider.state(historitruk);
     })

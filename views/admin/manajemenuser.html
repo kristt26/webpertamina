@@ -78,13 +78,14 @@
                                     <td>terserah@gmail.com</td>
                                     <td>Admin Perusahaan</td>
                                     <td>
-                                        <a href="<?= base_url('kategorikbli/update/'.$value->idKategorikbli); ?>" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
-                                        <a href="<?= base_url('kategorikbli/hapus/'.$value->idKategorikbli); ?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
+                                        <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                     <td>
-                                        <span class="switchery" style="background-color: rgb(23, 182, 164); border-color: rgb(23, 182, 164); box-shadow: rgb(23, 182, 164) 0px 0px 0px 16px inset; transition: border 0.5s ease 0s, box-shadow 0.5s ease 0s, background-color 1.5s ease 0s;"><small
-                                                style="left: 20px; transition: left 0.25s ease 0s;"></small></span>
-
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                            <label class="custom-control-label" for="customSwitch1"></label>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
