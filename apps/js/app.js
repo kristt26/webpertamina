@@ -1,10 +1,9 @@
-angular.module("app",
-[
+angular.module("app", [
     "app.router",
     "datatables",
     "swangular",
     "message.service",
-    
+
     "auth.service",
     "storage.services",
     "helper.service",
@@ -12,16 +11,17 @@ angular.module("app",
     "app.conponent",
 
     "auth.controller",
- 
-    
+    "admin.controller",
 
-]).controller("homeController",homeController)
+
+
+]).controller("homeController", homeController)
 
 ;
 
 
-function homeController($scope,AuthService){
-    $scope.logOff=function(){
+function homeController($scope, AuthService) {
+    $scope.logOff = function() {
         AuthService.logOff();
     }
 }

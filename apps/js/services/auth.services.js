@@ -1,9 +1,9 @@
 angular.module("auth.service", [])
 
-    .factory("AuthService", AuthService)
+.factory("AuthService", AuthService)
 
 
-    ;
+;
 
 
 
@@ -13,9 +13,14 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
     var service = {};
 
     return {
-        login: login, logOff: logoff, userIsLogin: userIsLogin, getUserName: getUserName,
-        userIsLogin: userIsLogin, userInRole: userInRole,
-        getHeader: getHeader, url: service.url
+        login: login,
+        logOff: logoff,
+        userIsLogin: userIsLogin,
+        getUserName: getUserName,
+        userIsLogin: userIsLogin,
+        userInRole: userInRole,
+        getHeader: getHeader,
+        url: service.url
     }
 
     function login(user) {
