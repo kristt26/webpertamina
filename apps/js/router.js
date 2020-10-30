@@ -47,6 +47,41 @@ angular.module("app.router", ["ui.router"])
             templateUrl: 'apps/views/admin/manajemenuser.html'
         })
 
+        .state("listpemeriksaan", {
+            url: '/listpemeriksaan',
+            parent: 'index',
+            controller: "adminlistpemeriksaanController",
+            templateUrl: 'apps/views/admin/listpemeriksaan.html'
+        })
+
+        .state("tambahlistpemeriksaan", {
+            url: '/tambahlistpemeriksaan',
+            parent: 'index',
+            controller: "admintambahlistpemeriksaanController",
+            templateUrl: 'apps/views/admin/tambahlistpemeriksaan.html'
+        })
+
+        .state("persetujuankim", {
+            url: '/persetujuankim',
+            parent: 'index',
+            controller: "adminpersetujuankimController",
+            templateUrl: 'apps/views/admin/persetujuankim.html'
+        })
+
+        .state("kim", {
+            url: '/kim',
+            parent: 'index',
+            controller: "adminkimController",
+            templateUrl: 'apps/views/admin/kim.html'
+        })
+
+        .state("historitruk", {
+            url: '/historitruk',
+            parent: 'index',
+            controller: "adminhistoritrukController",
+            templateUrl: 'apps/views/admin/historitruk.html'
+        })
+
         .state('about', {
             // we'll get to this in a bit       
         });
