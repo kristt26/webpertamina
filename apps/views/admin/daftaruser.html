@@ -16,7 +16,7 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">ID User</th>
+                            <th scope="col">Username</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Email</th>
                             <th scope="col">Sebagai</th>
@@ -24,14 +24,14 @@
                     </thead>
                     <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="item in datas">
                             <th scope="row">
-                                1
+                                {{$index+1}}
                             </th>
-                            <td>00001</td>
-                            <td>Candra</td>
-                            <td>terserah@gmail.com</td>
-                            <td>Admin Perusahaan</td>
+                            <td>{{item.userName}}</td>
+                            <td>{{item.firstName}} {{item.lastName}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.userRoles[0].role.name}}</td>
                         </tr>
                     </tbody>
                     <!-- <?php endforeach; ?> -->

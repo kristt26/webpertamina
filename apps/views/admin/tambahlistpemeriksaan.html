@@ -8,43 +8,62 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <i class="fas fa-table mr-1"></i> Tambah List Pemeriksaan
+                            <i class="fa fa-table mr-1"></i> Tambah List Pemeriksaan
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="iduser" class="control-label">Kelengkapan</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Kelengkapan" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Tambahkan Detail</label>
-                        </div>
-                    </div>
-                    <fieldset disabled>
+                    <form ng-submit="simpan()">
                         <div class="form-group">
-                            <label for="iduser" class="control-label">Detail Kelengkapan</label>
+                            <label for="iduser" class="control-label">Kelengkapan</label>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Detail Kelengkapan" aria-label="Detail Kelengkapan" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button">tambah</button>
+                                <input type="text" class="form-control" placeholder="Kelengkapan" ng-model="model.name"
+                                    aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" ng-model="model.cek"
+                                    id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Tambahkan Detail</label>
+                            </div>
+                        </div> -->
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="iduser" class="control-label">Detail Kelengkapan</label>
+                                <div class="input-group mb-3" ng-repeat="item in model.items">
+                                    <input type="text" class="form-control" placeholder="Detail Kelengkapan"
+                                        aria-label="Detail Kelengkapan" aria-describedby="basic-addon2"
+                                        ng-model="item.kelengkapan" disabled>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-warning" type="button"><i class="fa fa-edit"
+                                                ng-click="ubahDetail(item)" data-toggle="modal"
+                                                data-target="#additemDetail"></i></button>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Detail Kelengkapan"
+                                        aria-label="Detail Kelengkapan" aria-describedby="basic-addon2"
+                                        ng-model="itemDetail" disabled>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button" data-toggle="modal"
+                                            data-target="#additemDetail"><i class="fa fa-plus"></i></button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </fieldset>
-                    <div class="form-group">
-                        <label for="iduser" class="control-label">Penjelasan</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Penjelasan" aria-label="Penjelasan" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">tambah</button>
+                        </fieldset>
+                        <!-- <div class="form-group">
+                            <label for="iduser" class="control-label">Penjelasan</label>
+                            <div class="input-group mb-3">
+                                <textarea type="text" class="form-control" rows="3" placeholder="Penjelasan"
+                                    ng-model="model.penjelasan" aria-label="Penjelasan" aria-describedby="basic-addon2"
+                                    required></textarea>
                             </div>
+                        </div> -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info" type="button">Tambah</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -53,7 +72,7 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <i class="fas fa-table mr-1"></i> Daftar User
+                            <i class="fa fa-table mr-1"></i> List Pemeriksaan
                         </div>
                     </div>
                 </div>
@@ -63,30 +82,76 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Kategori</th>
                                     <th scope="col">Kelengkapan</th>
-                                    <th scope="col">Detail</th>
                                     <th scope="col">Penjelasan</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody ng-repeat="item in datas">
                                 <tr>
                                     <th scope="row">
-                                        1
+                                        {{$index+1}}
                                     </th>
-                                    <td>STNK</td>
-                                    <td>---</td>
-                                    <td>---</td>
+                                    <th colspan="3">
+                                        {{item.name}}
+                                    </th>
                                     <td>
-                                        <a class="btn btn-primary btn-sm"><i class="fa fc-basic-view"></i> </a>
-                                        <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
+                                        <a class="btn btn-primary btn-sm" ng-show="item.detail"><i
+                                                class="fa fa-eye"></i> </a>
+                                        <a class="btn btn-warning btn-sm" ng-click="ubah(item)"><i
+                                                class="fa fa-edit"></i> </a>
                                         <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
+                                </tr>
+                                <tr ng-repeat="itemDetail in item.items">
+                                    <td></td>
+                                    <td></td>
+                                    <td>{{itemDetail.kelengkapan}}</td>
+                                    <td>{{itemDetail.penjelasan}}</td>
+
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="additemDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c454d; color: #fff;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Detail Kelengkapan</h5>
+                <button type="button" class="close" style="color: #3c454d" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="iduser" class="control-label">Kelengkapan</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Kelengkapan" ng-model="detail.kelengkapan"
+                            aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="iduser" class="control-label">Penjelasan</label>
+                    <div class="input-group mb-3">
+                        <textarea type="text" class="form-control" rows="3" placeholder="Penjelasan"
+                            ng-model="detail.penjelasan" aria-label="Penjelasan" aria-describedby="basic-addon2"
+                            required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clear()">Close</button>
+                <button type="button" class="btn btn-primary" ng-click="addDetail()" data-dismiss="modal"
+                    ng-show="tombolSimpan">Simpan</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-hide="tombolSimpan">Ubah</button>
             </div>
         </div>
     </div>

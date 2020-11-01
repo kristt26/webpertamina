@@ -1,9 +1,9 @@
 angular.module("auth.service", [])
 
-.factory("AuthService", AuthService)
+    .factory("AuthService", AuthService)
 
 
-;
+    ;
 
 
 
@@ -20,7 +20,7 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
         userIsLogin: userIsLogin,
         userInRole: userInRole,
         getHeader: getHeader,
-        url: service.url
+        getToken: getToken
     }
 
     function login(user) {
@@ -47,19 +47,21 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
 
 
 
+
+
     function getHeader() {
 
         try {
             if (userIsLogin()) {
                 return {
-                    'Content-Type': 'json/application',
+                    'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + getToken()
                 }
             }
             throw new Error("Not Found Token");
         } catch {
             return {
-                'Content-Type': 'json/application'
+                'Content-Type': 'application/json'
             }
         }
     }
@@ -74,6 +76,13 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
         if (userIsLogin) {
             var result = StorageService.getObject("user");
             return result.Username;
+        }
+    }
+
+    function getToken() {
+        if (userIsLogin) {
+            var result = StorageService.getObject("user");
+            return result.token;
         }
     }
 

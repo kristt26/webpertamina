@@ -25,8 +25,19 @@
 }
 
 .img-pictures {
-    border-radius: 150px;
+    border-radius: 300px;
     background: linear-gradient(145deg, #e1e1e1, #ffffff);
-    box-shadow: 19px 19px 37px #dcdcdc, -19px -19px 37px #ffffff;
-    width: 100%;
+    box-shadow: 21px 21px 43px #dcdcdc, -21px -21px 43px #ffffff;
+    width: 50%;
+}
+
+.nav-tabs .nav-link {
+    background-color: #fff !important;
+    color: #000;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #fff;
+    background-color: #000 !important;
+    border-color: #dee2e6 #dee2e6 #FFF;
 }

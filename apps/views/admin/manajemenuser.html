@@ -15,19 +15,23 @@
                 <div class="card-body">
                     <label for="iduser" class="control-label">ID User</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ID User" aria-label="Default" aria-describedby="inputGroup-sizing-default" autofocus>
+                        <input type="text" class="form-control" placeholder="ID User" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default" autofocus>
                     </div>
                     <label for="iduser" class="control-label">Nama</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nama" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="Nama" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
                     </div>
                     <label for="iduser" class="control-label">Email</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="email" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="email" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
                     </div>
                     <label for="iduser" class="control-label">Kontak</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Kontak" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <input type="text" class="form-control" placeholder="Kontak" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
                     </div>
                     <label for="">Sebagai</label>
                     <div class="input-group sm-3">
@@ -60,36 +64,36 @@
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
-                                    <th scope="col">Id User</th>
+                                    <th scope="col">Username</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">sebagai</th>
+                                    <th scope="col">Sebagai</th>
                                     <th scope="col">Action</th>
                                     <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="item in datas">
                                     <th scope="row">
-                                        <?= $key+1; ?>
+                                        {{$index+1}}
                                     </th>
-                                    <td>00001</td>
-                                    <td>Candra</td>
-                                    <td>terserah@gmail.com</td>
-                                    <td>Admin Perusahaan</td>
+                                    <td>{{item.userName}}</td>
+                                    <td>{{item.firstName}} {{item.lastName}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.userRoles[0].role.name}}</td>
                                     <td>
                                         <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
                                         <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                     <td>
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                                                ng-checked="item.status">
                                             <label class="custom-control-label" for="customSwitch1"></label>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
-                            <?php endforeach; ?>
                         </table>
                     </div>
                 </div>

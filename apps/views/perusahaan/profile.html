@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-address-card-o fa-lg" aria-hidden="true"></i> Detail Perusahaan
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-2 ml-2">
+                        <img class="img-pictures" src="{{url + model.logo}}" alt="">
+                        <div class="custom-file" ng-if="!statusProfile">
+                            <input type="file" class="custom-file-input" ng-model="model.logoData" id="customFile"
+                                base-sixty-four-input>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="col-md-7 mb-2">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nama Perusahaan</label>
+                            <div class="col-sm-8">
+                                <input type="text" ng-readonly="statusProfile"
+                                    ng-class="{'form-control-plaintext': statusProfile, 'form-control': !statusProfile}"
+                                    ng-model="model.name" id="inputEmail3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Alamat</label>
+                            <div class="col-sm-8">
+                                <textarea name="" id="" rows="3" ng-model="model.address"
+                                    ng-class="{'form-control-plaintext': statusProfile, 'form-control': !statusProfile}"
+                                    ng-readonly="statusProfile"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">NPWP</label>
+                            <div class="col-sm-8">
+                                <input type="text"
+                                    ng-class="{'form-control-plaintext': statusProfile, 'form-control': !statusProfile}"
+                                    ng-model="model.npwp" id="inputEmail3" ng-readonly="statusProfile">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">email</label>
+                            <div class="col-sm-8">
+                                <input type="email"
+                                    ng-class="{'form-control-plaintext': statusProfile, 'form-control': !statusProfile}"
+                                    ng-model="model.email" id="inputEmail3" ng-readonly="statusProfile">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button ng-if="!statusProfile" class="btn btn-primary pull-right mf-2" role="button"
+                    ng-click="simpan()"><i class="fa fa-plus"></i> Simpan</button>
+                <button ng-if="statusProfile" class="btn btn-primary pull-right mf-2" role="button" ng-click="edit()"><i
+                        class="fa fa-edit"></i> Edit</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 angular.module('admin.router', ['ui.router'])
-    .config(function($stateProvider) {
+    .config(function ($stateProvider) {
         var helloState = {
             name: 'hello',
             url: '/hello',

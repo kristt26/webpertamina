@@ -6,10 +6,11 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    <i class="fas fa-table mr-1"></i> List Pemeriksaan
+                    <i class="fa fa-table mr-1"></i> List Pemeriksaan
                 </div>
                 <div>
-                    <a ui-sref="tambahlistpemeriksaan" class="btn btn-success btn-sm"><i class="fa pulseWarningIns"></i>Tambah</a>
+                    <a ui-sref="tambahlistpemeriksaan" class="btn btn-success btn-sm"><i
+                            class="fa pulseWarningIns"></i>Tambah</a>
                 </div>
             </div>
         </div>
@@ -20,22 +21,18 @@
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Kelengkapan</th>
-                            <th scope="col">Detail</th>
                             <th scope="col">Penjelasan</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
                     <tbody>
-                        <tr>
-                            <th scope="row">
-                                1
-                            </th>
-                            <td>STNK</td>
-                            <td>-</td>
-                            <td>-</td>
+                        <tr ng-repeat="item in datas">
+                            <td scope="row">{{$index+1}}</td>
+                            <td>{{item.kelengkapan}}</td>
+                            <td>{{item.penjelasan}}</td>
                             <td>
-                                <a class="btn btn-warning btn-sm"><i class="fa fc-basic-view"></i> </a>
+                                <a class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
                                 <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
                                 <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                             </td>

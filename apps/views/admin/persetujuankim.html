@@ -6,7 +6,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    <i class="fas fa-table mr-1"></i> Daftar Persetujuan KIM
+                    <i class="fa fa-table mr-1"></i> Daftar Persetujuan KIM
                 </div>
             </div>
         </div>
@@ -16,29 +16,26 @@
                     <thead>
                         <tr>
                             <th scope="col">No</th>
-                            <th scope="col">Tanggal Pengajuan</th>
                             <th scope="col">Nama Perusahaan</th>
                             <th scope="col">No. Polisi</th>
                             <th scope="col">Tanggal Persetujuan</th>
-                            <th scope="col">Nama Petugas</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
                     <tbody>
-                        <tr>
+                        <tr ng-repeat="item in datas">
                             <th scope="row">
-                                1
+                                {{$index+1}}
                             </th>
-                            <td>date</td>
-                            <td>Pt. Maju Makmur</td>
-                            <td>PA50784DS</td>
-                            <td>date</td>
-                            <td>Pt. Maju Makmur</td>
-                            <td>Status</td>
+                            <td>{{item.truck.company}}</td>
+                            <td>{{item.truck.plateNumber}}</td>
+                            <td>{{item.persetujuans[0].approvedDate | date: 'DD/MM/YYYY'}}</td>
+                            <td>{{item.status}}</td>
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
                                     Buat KIM
                                 </button>
                             </td>
@@ -52,7 +49,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,31 +65,36 @@
                         <div class="form-group row">
                             <label for="disabledTextInput" class="col-sm-4 col-form-label">Nama Perusahaan</label>
                             <div class="col-sm-8">
-                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel" placeholder="Nama Perusahaan">
+                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel"
+                                    placeholder="Nama Perusahaan">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="disabledTextInput" class="col-sm-4 col-form-label">No. Polisi</label>
                             <div class="col-sm-8">
-                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel" placeholder="No. Polisi">
+                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel"
+                                    placeholder="No. Polisi">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="disabledTextInput" class="col-sm-4 col-form-label">Nama Supir</label>
                             <div class="col-sm-8">
-                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel" placeholder="Nama Supir">
+                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel"
+                                    placeholder="Nama Supir">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="disabledTextInput" class="col-sm-4 col-form-label">Nama Kernet</label>
                             <div class="col-sm-8">
-                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel" placeholder="Nama Kernet">
+                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel"
+                                    placeholder="Nama Kernet">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="disabledTextInput" class="col-sm-4 col-form-label">Jenis Produk</label>
                             <div class="col-sm-8">
-                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel" placeholder="Jenis Produk">
+                                <input type="text" id="disabledTextInput" class="form-control" id="colFormLabel"
+                                    placeholder="Jenis Produk">
                             </div>
                         </div>
                     </fieldset>
@@ -104,18 +107,17 @@
                     <div class="form-group row">
                         <div class="input-group mb-3">
                             <label for="colFormLabel" class="col-sm-4 col-form-label">Tanggal Berlaku</label>
-                            <input type="text" class="form-control" placeholder="Tanggal Berlaku" aria-label="Tanggal Berlaku" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Button</button>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Tanggal Berlaku">
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="input-group mb-3">
                             <label for="colFormLabel" class="col-sm-4 col-form-label">Tanggal Berakhir</label>
-                            <input type="text" class="form-control" placeholder="Tanggal Berakhir" aria-label="Tanggal Berakhir" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Button</button>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="Tanggal Berakhir"
+                                    aria-label="Tanggal Berakhir" aria-describedby="basic-addon2">
                             </div>
                         </div>
                     </div>
