@@ -1,39 +1,18 @@
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Dashboard</li>
-</ol>
 <div class="container-fluid">
     <div class="card mb-4">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div>
-                    <i class="fas fa-table mr-1"></i> Histori Truk
+                    <i class="fa fa-table mr-1"></i> List Pengajuan
+                </div>
+                <div>
+                    <a ui-sref="tambahpengajuan" class="btn btn-success btn-sm"><i
+                            class="fa pulseWarningIns"></i>Tambah</a>
                 </div>
             </div>
         </div>
         <div class="card-body">
-
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-7">
-                        <div class="text-center">
-                            <h3>PT. PERTAMINA (PERSERO) MOR VIII FT JAYAPURA <BR> PEMERIKSAAN MOBIL TANGKI BAHAN BAKAR
-                                MINYAK</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <img src="assets/images/Logo.png" style="width: 50%;" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-6">
-
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="table-responsive">
+            <div class="table-responsive">
                 <table class="table table-hover ; text-justify" datatable="ng" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -44,6 +23,7 @@
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
                     <tbody>
                         <tr ng-repeat="item in datas">
                             <td scope="row">{{$index+1}}</td>
@@ -57,8 +37,9 @@
                             </td>
                         </tr>
                     </tbody>
+                    <!-- <?php endforeach; ?> -->
                 </table>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>

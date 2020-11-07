@@ -9,39 +9,360 @@
                 </li>
             </ul>
             <div class="card">
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade active show" id="datatruk">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="datatruk">
+                        <div class="card-body">
                             <table datatable="" class="table row-border hover">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>First name</th>
-                                        <th>Last name</th>
+                                        <th>No</th>
+                                        <th>No. Polisi</th>
+                                        <th>Supir</th>
+                                        <th>Kernet</th>
+                                        <th>Berkas Truk</th>
+                                        <th>Berkas Supir</th>
+                                        <th>Berkas Kernet</th>
+                                        <th><i class="fa fa-gear"></i></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Foo</td>
-                                        <td>Bar</td>
+                                    <tr ng-repeat="item in datas">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{item.plateNumber}}</td>
+                                        <td>{{item.driverName}}</td>
+                                        <td>{{item.assdriverName}}</td>
+                                        <td>
+                                            <ol>
+                                                <li><a href="{{url+item.vehicleRegistration}}" target="_blank">File
+                                                        STNK</a>
+                                                <li><a href="{{url+item.keurDLLAJR}}" target="_blank">File KIR</a>
+                                            </ol>
+                                        </td>
+                                        <td>
+                                            <ol>
+                                                <li><a href="{{url+item.driverIDCard}}" target="_blank">KTP</a>
+                                                <li><a href="{{url+item.driverLicense}}" target="_blank">SIM</a>
+                                                <li><a href="{{url+item.driverPhoto}}" target="_blank">Photo</a>
+                                            </ol>
+                                        </td>
+                                        <td>
+                                            <ol>
+                                                <li><a href="{{url+item.assdriverIDCard}}" target="_blank">KTP</a>
+                                                <li><a href="{{url+item.assdriverLicense}}" target="_blank">SIM</a>
+                                                <li><a href="{{url+item.assdriverPhoto}}" target="_blank">Photo</a>
+                                            </ol>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>123</td>
-                                        <td>Someone</td>
-                                        <td>Youknow</td>
-                                    </tr>
-                                    <tr>
-                                        <td>987</td>
-                                        <td>Iamout</td>
-                                        <td>Ofinspiration</td>
-                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="tambahtruk">
+                    </div>
+                    <div class="tab-pane fade" id="tambahtruk">
+                        <form ng-submit="simpan()">
+                            <div class="card-line">
+                                <h4>Data Truk</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">No Polisi</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.plateNumber"
+                                                    id="inputEmail3" required placeholder="Nomor Polisi">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Merek</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.merk"
+                                                    id="inputEmail3" required placeholder="Merek Mobil">
+                                            </div>
+                                        </div>
 
-                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tahun
+                                                Pembuatan</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.carcreated"
+                                                    id="inputEmail3" required placeholder="Tahun Pembuatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">STNK</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.vehicleRegistration.number" id="inputEmail3"
+                                                    required placeholder="Nomor STNK">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.vehicleRegistration.berlaku" id="inputEmail3"
+                                                    required placeholder="Mulai Berlaku">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.vehicleRegistration.hingga" id="inputEmail3"
+                                                    required placeholder="Selesai Berlaku">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File STNK</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileVehicleRegistration" id="customFileSTNK"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFileSTNK">{{model.fileVehicleRegistration ? model.fileVehicleRegistration.filename: 'Pilih File STNK'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Jenis
+                                                Muatan</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.trucktype"
+                                                    id="inputEmail3" required placeholder="Jenis Muatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">KIR</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.keurDLLAJR.number" id="inputEmail3" required
+                                                    placeholder="Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.keurDLLAJR.berlaku" id="inputEmail3" required
+                                                    placeholder="Berlaku Dari">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.keurDLLAJR.hingga" id="inputEmail3" required
+                                                    placeholder="Berlaku Sampai">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File KIR</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileKeurDLLAJR" id="customFile"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFile">{{model.fileKeurDLLAJR ? model.fileKeurDLLAJR.filename: 'Pilih File KIR'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-line">
+                                <h4>Data Supir</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nama</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.drivername"
+                                                    id="inputEmail3" required placeholder="Nama Supir">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">KTP</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.driverIDCard"
+                                                    id="inputEmail3" required placeholder="Nomor KTP">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileDriverId" id="customFileKTP"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFileKTP">{{model.fileDriverId ? model.fileDriverId.filename: 'Pilih KTP'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Photo Supir</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileDriverPhoto" id="customFilePhoto"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFilePhoto">{{model.fileDriverPhoto ? model.fileDriverPhoto.filename: 'Pilih Photo'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">SIM</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.driverLicense.number" id="inputEmail3" required
+                                                    placeholder="Nomor SIM">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.driverLicense.Berlaku" id="inputEmail3" required
+                                                    placeholder="Berlaku">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.driverLicense.Hingga" id="inputEmail3" required
+                                                    placeholder="Tanggal Berakhir">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File SIM</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileDriverLicense" id="customFileKTP"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFileKTP">{{model.fileDriverLicense ? model.fileDriverLicense.filename: 'Pilih KTP'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-line">
+                                <h4>Data Kernet</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Nama</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.assdriverName"
+                                                    id="inputEmail3" required placeholder="Nama Kernet">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">KTP</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" ng-model="model.assdriverIDCard"
+                                                    id="inputEmail3" required placeholder="Nomor KTP Kernet">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileAssDriverId" id="customFileKTPKernet"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFileKTPKernet">{{model.fileAssDriverId ? model.fileAssDriverId.filename: 'Pilih KTP'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Photo
+                                                Kernet</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileAssDriverPhoto" id="customFilePhotoKernet"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFilePhotoKernet">{{model.fileAssDriverPhoto ? model.fileAssDriverPhoto.filename: 'Pilih Photo'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        &nbsp;
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">SIM</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.assdriverLicense.number" id="inputEmail3" required
+                                                    placeholder="Nomor SIM">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.assdriverLicense.Berlaku" id="inputEmail3" required
+                                                    placeholder="Berlaku">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <div class="col-sm-8">
+                                                <input type="date" class="form-control"
+                                                    ng-model="model.assdriverLicense.Hingga" id="inputEmail3" required
+                                                    placeholder="Tanggal Berakhir">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File SIM</label>
+                                            <div class="col-sm-8">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input"
+                                                        ng-model="model.fileAssDriverLicense" id="customFileSIMKernet"
+                                                        base-sixty-four-input>
+                                                    <label class="custom-file-label"
+                                                        for="customFileSIMKernet">{{model.fileAssDriverLicense ? model.fileAssDriverLicense.filename: 'Pilih KTP'}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-plus"></i>
+                                    Simpan</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -5,9 +5,14 @@ angular
     .controller('adminlistpemeriksaanController', adminlistpemeriksaanController)
     .controller('adminpersetujuankimController', adminpersetujuankimController)
     .controller('adminkim', adminkim)
-    .controller('adminhistoritruk', adminhistoritruk);
+    .controller('adminhistoritrukController', adminhistoritrukController);
 
-function adminController($scope) {
+function adminController($scope, $state) {
+    if (!AuthService.userIsLogin()) {
+        $state.go("login");
+    } else {
+
+    }
 
 }
 
@@ -81,7 +86,7 @@ function adminkim($scope) {
 
 }
 
-function adminhistoritruk($scope) {
+function adminhistoritrukController($scope) {
     $scope.Title = 'KIM'
 
 }

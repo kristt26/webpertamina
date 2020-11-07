@@ -41,3 +41,12 @@
     background-color: #000 !important;
     border-color: #dee2e6 #dee2e6 #FFF;
 }
+
+.card-line {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+    color: #000;
+    font-size: 17px;
+}

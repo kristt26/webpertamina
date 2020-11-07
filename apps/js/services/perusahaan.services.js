@@ -2,10 +2,10 @@ angular.module('perusahaan.service', [])
     .factory('CompanyServices', CompanyServices)
     .factory('ProfilePerusahaanServices', ProfilePerusahaanServices)
     .factory('KendaraanServices', KendaraanServices)
-    .factory('PersetujuanKimServices', PersetujuanKimServices)
+    .factory('PengajuanServices', PengajuanServices)
     ;
 
-function CompanyServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
+function CompanyServices($http, $q, helperServices, AuthService, message) {
     var controller = helperServices.url + 'companyadministrator';
     var service = {};
     service.data = [];
@@ -135,7 +135,7 @@ function ProfilePerusahaanServices($http, $q, helperServices, AuthService) {
     }
 }
 
-function KendaraanServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
+function KendaraanServices($http, $q, helperServices, AuthService, message) {
     var controller = helperServices.url + 'companyadministrator/trucks';
     var service = {};
     service.data = [];
@@ -212,13 +212,13 @@ function KendaraanServices($http, $q, StorageService, $state, helperServices, Au
         return def.promise;
     }
 }
-function PersetujuanKimServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
-    var controller = helperServices.url + 'administrator';
+function PengajuanServices($http, $q, helperServices, AuthService, message) {
+    var controller = helperServices.url + 'companyadministrator';
     var service = {};
     service.data = [];
     service.instance = false;
     return {
-        get: get
+        get: get, post: post
     };
 
     function get() {
@@ -228,7 +228,7 @@ function PersetujuanKimServices($http, $q, StorageService, $state, helperService
         } else {
             $http({
                 method: 'get',
-                url: controller + "/get",
+                url: controller + "/submission",
                 headers: AuthService.getHeader()
             }).then(
                 (res) => {
@@ -242,6 +242,27 @@ function PersetujuanKimServices($http, $q, StorageService, $state, helperService
                 }
             );
         }
+        return def.promise;
+    }
+
+    function post(params) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + "/createsubmission",
+            data: params,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                service.instance = true;
+                service.data.push(res.data);
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
         return def.promise;
     }
 }

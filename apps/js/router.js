@@ -109,6 +109,40 @@ angular.module("app.router", ["ui.router"])
                 templateUrl: 'apps/views/perusahaan/kendaraan.html'
             })
 
+            .state("pengajuan", {
+                url: '/pengajuan',
+                parent: 'perusahaan',
+                controller: "pengajuanController",
+                templateUrl: 'apps/views/perusahaan/pengajuan.html'
+            })
+
+            .state("tambahpengajuan", {
+                url: '/tambahpengajuan',
+                parent: 'perusahaan',
+                controller: "tambahPengajuanController",
+                templateUrl: 'apps/views/perusahaan/tambahpengajuan.html'
+            })
+
+            .state("pejabat", {
+                url: '/pejabat',
+                parent: 'perusahaan',
+                controller: "pejabatController",
+                templateUrl: 'apps/views/perusahaan/pejabat.html'
+            })
+
+            .state("histori", {
+                url: '/histori',
+                parent: 'perusahaan',
+                controller: "adminhistoritrukController",
+                templateUrl: 'apps/views/admin/historitruk.html'
+            })
+            .state("detailhistori", {
+                url: '/detailhistori',
+                parent: 'perusahaan',
+                controller: "adminhistoritrukController",
+                templateUrl: 'apps/views/admin/detailhistoritruk.html'
+            })
+
             .state('about', {
                 // we'll get to this in a bit       
             });

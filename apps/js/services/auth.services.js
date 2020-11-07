@@ -17,10 +17,11 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
         logOff: logoff,
         userIsLogin: userIsLogin,
         getUserName: getUserName,
-        userIsLogin: userIsLogin,
+        // userIsLogin: userIsLogin,
         userInRole: userInRole,
         getHeader: getHeader,
-        getToken: getToken
+        getToken: getToken,
+        getUserId: getUserId
     }
 
     function login(user) {
@@ -83,6 +84,12 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
         if (userIsLogin) {
             var result = StorageService.getObject("user");
             return result.token;
+        }
+    }
+    function getUserId() {
+        if (userIsLogin) {
+            var result = StorageService.getObject("user");
+            return result.id;
         }
     }
 

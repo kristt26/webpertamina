@@ -1,0 +1,146 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-table mr-1"></i> List Pemeriksaan
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form ng-submit="simpan()">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">No Surat</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" readonly ng-model="model.letterNumber"
+                                    id="inputEmail3" required placeholder="Nomor Polisi">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        &nbsp;
+                    </div>
+                    <!-- <div class="col-md-5">
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-4 col-form-label">Tanggal Pengajuan</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control" ng-model="model.created" id="inputEmail3"
+                                    required>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="card-line">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <i class="fa fa-table mr-1"></i> Item Truk
+                        </div>
+                        <div>
+                            <a href="javascript:void();" class="btn btn-info btn-sm" data-toggle="modal"
+                                data-target="#tambahItems"><i class="fa fa-plus"></i>Add Kendaraan</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover ; text-justify" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>No. Polisi</th>
+                                <th>Supir</th>
+                                <th>Kernet</th>
+                                <th>Berkas Truk</th>
+                                <th>Berkas Supir</th>
+                                <th>Berkas Kernet</th>
+                                <th>Jenis Pengajuan</th>
+                                <th><i class="fa fa-gear"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in model.items">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.plateNumber}}</td>
+                                <td>{{item.driverName}}</td>
+                                <td>{{item.assdriverName}}</td>
+                                <td>
+                                    <ol>
+                                        <li><a href="{{url+item.vehicleRegistration}}" target="_blank">File
+                                                STNK</a>
+                                        <li><a href="{{url+item.keurDLLAJR}}" target="_blank">File KIR</a>
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        <li><a href="{{url+item.driverIDCard}}" target="_blank">KTP</a>
+                                        <li><a href="{{url+item.driverLicense}}" target="_blank">SIM</a>
+                                        <li><a href="{{url+item.driverPhoto}}" target="_blank">Photo</a>
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        <li><a href="{{url+item.assdriverIDCard}}" target="_blank">KTP</a>
+                                        <li><a href="{{url+item.assdriverLicense}}" target="_blank">SIM</a>
+                                        <li><a href="{{url+item.assdriverPhoto}}" target="_blank">Photo</a>
+                                    </ol>
+                                </td>
+                                <td>{{item.attackStatus}}</td>
+                                <td>
+                                    <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
+                                            class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                        <!-- <?php endforeach; ?> -->
+                    </table>
+
+                </div>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary btn-sm pull-right">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tambahItems" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c454d; color: #fff;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Add Kendaraan</h5>
+                <button type="button" class="close" style="color: #3c454d" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="iduser" class="control-label">Truk</label>
+                    <div class="input-group mb-3">
+                        <select class="select2bs4" name="state"
+                            ng-options="item as item.plateNumber for item in kendaraan" ng-model="itemkendaraan">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="iduser" class="control-label">Jenis Pengajuan</label>
+                    <div class="input-group mb-3">
+                        <select class="form-control" ng-options="item as item for item in jenisPengajuan"
+                            ng-model="itemkendaraan.attackStatus"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clear()">Close</button>
+                <button type="button" class="btn btn-info" ng-click="setItem(itemkendaraan)"
+                    data-dismiss="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

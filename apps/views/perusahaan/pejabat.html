@@ -1,0 +1,103 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <i class="fa fa-table mr-1"></i> Tambah Pejabat
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <label for="iduser" class="control-label">ID User</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="ID User" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default" autofocus>
+                    </div>
+                    <label for="iduser" class="control-label">Nama</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nama" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <label for="iduser" class="control-label">Email</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="email" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <label for="iduser" class="control-label">Kontak</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Kontak" aria-label="Default"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <label for="">Sebagai</label>
+                    <div class="input-group sm-3">
+                        <!-- <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                        </div> -->
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Pilih...</option>
+                            <option value="1">Admin Perusahaan</option>
+                            <option value="2">Approve 1</option>
+                            <option value="3">HSE</option>
+                            <option value="3">Manager</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <i class="fa fa-table mr-1"></i> Daftar Pejabat
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover ; text-justify" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Sebagai</th>
+                                    <th scope="col">Action</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in datas">
+                                    <th scope="row">
+                                        {{$index+1}}
+                                    </th>
+                                    <td>{{item.userName}}</td>
+                                    <td>{{item.firstName}} {{item.lastName}}</td>
+                                    <td>{{item.email}}</td>
+                                    <td>{{item.userRoles[0].role.name}}</td>
+                                    <td>
+                                        <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
+                                        <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
+                                                ng-checked="item.status">
+                                            <label class="custom-control-label" for="customSwitch1"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
