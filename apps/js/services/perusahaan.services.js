@@ -192,7 +192,7 @@ function KendaraanServices($http, $q, helperServices, AuthService, message) {
         var def = $q.defer();
         $http({
             method: 'put',
-            url: controller + '?id=' + params.id,
+            url: controller + '/' + params.id,
             data: params,
             headers: AuthService.getHeader()
         }).then(
@@ -218,7 +218,7 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
     service.data = [];
     service.instance = false;
     return {
-        get: get, post: post
+        get: get, post: post, put: put
     };
 
     function get() {
@@ -249,6 +249,26 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
         var def = $q.defer();
         $http({
             method: 'post',
+            url: controller + "/createsubmission",
+            data: params,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                service.instance = true;
+                service.data.push(res.data);
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
+        return def.promise;
+    }
+    function put(params) {
+        var def = $q.defer();
+        $http({
+            method: 'put',
             url: controller + "/createsubmission",
             data: params,
             headers: AuthService.getHeader()

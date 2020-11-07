@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 mb-4">
         <div class="bs-component">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="javascript:void();"
                         data-target="#datatruk"><i class="fa fa-car fa-lg"></i>&nbsp;&nbsp; Data Truk</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="javascript:void();"
@@ -12,7 +12,7 @@
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade active show" id="datatruk">
                         <div class="card-body">
-                            <table datatable="" class="table row-border hover">
+                            <table datatable="ng" class="table row-border hover">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -33,28 +33,33 @@
                                         <td>{{item.assdriverName}}</td>
                                         <td>
                                             <ol>
-                                                <li><a href="{{url+item.vehicleRegistration}}" target="_blank">File
+                                                <li><a href="{{url+item.vehicleRegistration.document}}"
+                                                        target="_blank">File
                                                         STNK</a>
-                                                <li><a href="{{url+item.keurDLLAJR}}" target="_blank">File KIR</a>
+                                                <li><a href="{{url+item.keurDLLAJR.document}}" target="_blank">File
+                                                        KIR</a>
                                             </ol>
                                         </td>
                                         <td>
                                             <ol>
-                                                <li><a href="{{url+item.driverIDCard}}" target="_blank">KTP</a>
-                                                <li><a href="{{url+item.driverLicense}}" target="_blank">SIM</a>
+                                                <li><a href="{{url+item.driverIDCard.document}}" target="_blank">KTP</a>
+                                                <li><a href="{{url+item.driverLicense.document}}"
+                                                        target="_blank">SIM</a>
                                                 <li><a href="{{url+item.driverPhoto}}" target="_blank">Photo</a>
                                             </ol>
                                         </td>
                                         <td>
                                             <ol>
-                                                <li><a href="{{url+item.assdriverIDCard}}" target="_blank">KTP</a>
-                                                <li><a href="{{url+item.assdriverLicense}}" target="_blank">SIM</a>
+                                                <li><a href="{{url+item.assdriverIDCard.document}}"
+                                                        target="_blank">KTP</a>
+                                                <li><a href="{{url+item.assdriverLicense.document}}"
+                                                        target="_blank">SIM</a>
                                                 <li><a href="{{url+item.assdriverPhoto}}" target="_blank">Photo</a>
                                             </ol>
                                         </td>
                                         <td>
-                                            <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                            <a class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+                                            <a class="btn btn-warning btn-sm" ng-click="edit(item)"><i
+                                                    class="fa fa-edit"></i></a>
                                         </td>
                                     </tr>
 
@@ -69,7 +74,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">No Polisi</label>
                                             <div class="col-sm-8">
@@ -89,7 +94,7 @@
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Tahun
                                                 Pembuatan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" ng-model="model.carcreated"
+                                                <input type="text" class="form-control" ng-model="model.carCreated"
                                                     id="inputEmail3" required placeholder="Tahun Pembuatan">
                                             </div>
                                         </div>
@@ -102,19 +107,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa
+                                                Berlaku</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.vehicleRegistration.berlaku" id="inputEmail3"
-                                                    required placeholder="Mulai Berlaku">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
-                                            <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.vehicleRegistration.hingga" id="inputEmail3"
-                                                    required placeholder="Selesai Berlaku">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.vehicleRegistration.berlaku"
+                                                            id="inputEmail3" required placeholder="Mulai Berlaku">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.vehicleRegistration.hingga" id="inputEmail3"
+                                                            required placeholder="Selesai Berlaku">
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -130,16 +140,20 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        &nbsp;
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Jenis
                                                 Muatan</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" ng-model="model.trucktype"
+                                                <input type="text" class="form-control" ng-model="model.truckType"
                                                     id="inputEmail3" required placeholder="Jenis Muatan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Kapasitas</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" class="form-control" ng-model="model.capacity"
+                                                    id="inputEmail3" required placeholder="Kapasitas">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -147,23 +161,27 @@
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control"
                                                     ng-model="model.keurDLLAJR.number" id="inputEmail3" required
-                                                    placeholder="Number">
+                                                    placeholder="Nomor KIR">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa
+                                                Berlaku</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.keurDLLAJR.berlaku" id="inputEmail3" required
-                                                    placeholder="Berlaku Dari">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
-                                            <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.keurDLLAJR.hingga" id="inputEmail3" required
-                                                    placeholder="Berlaku Sampai">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.keurDLLAJR.berlaku" id="inputEmail3"
+                                                            required placeholder="Berlaku Dari">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.keurDLLAJR.hingga" id="inputEmail3" required
+                                                            placeholder="Berlaku Sampai">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -186,23 +204,44 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" ng-model="model.drivername"
+                                                <input type="text" class="form-control" ng-model="model.driverName"
                                                     id="inputEmail3" required placeholder="Nama Supir">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">KTP</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" ng-model="model.driverIDCard"
-                                                    id="inputEmail3" required placeholder="Nomor KTP">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.driverIDCard.number" id="inputEmail3" required
+                                                    placeholder="Nomor KTP">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa Berkalu
+                                                KTP</label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.driverIDCard.berlaku" id="inputEmail3"
+                                                            required placeholder="Berlaku Dari">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.driverIDCard.hingga" id="inputEmail3"
+                                                            required placeholder="Berlaku Dari">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File KTP</label>
                                             <div class="col-sm-8">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input"
@@ -226,10 +265,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        &nbsp;
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">SIM</label>
                                             <div class="col-sm-8">
@@ -239,19 +275,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa
+                                                Berlaku</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.driverLicense.Berlaku" id="inputEmail3" required
-                                                    placeholder="Berlaku">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
-                                            <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.driverLicense.Hingga" id="inputEmail3" required
-                                                    placeholder="Tanggal Berakhir">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.driverLicense.berlaku" id="inputEmail3"
+                                                            required placeholder="Berlaku">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.driverLicense.hingga" id="inputEmail3"
+                                                            required placeholder="Tanggal Berakhir">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -274,7 +314,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">Nama</label>
                                             <div class="col-sm-8">
@@ -285,12 +325,33 @@
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">KTP</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" ng-model="model.assdriverIDCard"
-                                                    id="inputEmail3" required placeholder="Nomor KTP Kernet">
+                                                <input type="text" class="form-control"
+                                                    ng-model="model.assdriverIDCard.number" id="inputEmail3" required
+                                                    placeholder="Nomor KTP Kernet">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa Berkalu
+                                                KTP</label>
+                                            <div class="col-sm-8">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.assdriverIDCard.berlaku" id="inputEmail3"
+                                                            required placeholder="Berlaku Dari">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.assdriverIDCard.hingga" id="inputEmail3"
+                                                            required placeholder="Berlaku Dari">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">File KTP</label>
                                             <div class="col-sm-8">
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input"
@@ -315,10 +376,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        &nbsp;
-                                    </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-6">
                                         <div class="form-group row">
                                             <label for="inputEmail3" class="col-sm-4 col-form-label">SIM</label>
                                             <div class="col-sm-8">
@@ -328,19 +386,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
+                                            <label for="inputEmail3" class="col-sm-4 col-form-label">Masa
+                                                Berlaku</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.assdriverLicense.Berlaku" id="inputEmail3" required
-                                                    placeholder="Berlaku">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-4 col-form-label"></label>
-                                            <div class="col-sm-8">
-                                                <input type="date" class="form-control"
-                                                    ng-model="model.assdriverLicense.Hingga" id="inputEmail3" required
-                                                    placeholder="Tanggal Berakhir">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.assdriverLicense.berlaku" id="inputEmail3"
+                                                            required placeholder="Berlaku">
+                                                    </div>
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label text-center">s/d</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="date" class="form-control"
+                                                            ng-model="model.assdriverLicense.hingga" id="inputEmail3"
+                                                            required placeholder="Tanggal Berakhir">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">

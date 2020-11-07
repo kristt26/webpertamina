@@ -70,7 +70,7 @@ function profilePerusahaanController($scope, helperServices, message, $rootScope
 }
 
 
-function kendaraanController($scope, KendaraanServices, helperServices) {
+function kendaraanController($scope, KendaraanServices, helperServices, message) {
     $scope.url = helperServices.base;
     $scope.datas = [];
     $scope.model = {};
@@ -78,6 +78,8 @@ function kendaraanController($scope, KendaraanServices, helperServices) {
     $scope.model.assdriverLicense = {};
     $scope.model.vehicleRegistration = {};
     $scope.model.keurDLLAJR = {};
+    $scope.model.assdriverIDCard = {};
+    $scope.model.driverIDCard = {};
     KendaraanServices.get().then(x => {
         $scope.datas = x;
         console.log(x);
@@ -86,17 +88,50 @@ function kendaraanController($scope, KendaraanServices, helperServices) {
         console.log(item);
     }
     $scope.simpan = () => {
-        $scope.model.driverLicense = JSON.stringify($scope.model.driverLicense);
-        $scope.model.assdriverLicense = JSON.stringify($scope.model.assdriverLicense);
-        $scope.model.vehicleRegistration = JSON.stringify($scope.model.vehicleRegistration);
-        $scope.model.keurDLLAJR = JSON.stringify($scope.model.keurDLLAJR);
         if ($scope.model.id) {
-
+            KendaraanServices.put($scope.model).then(x => {
+                message.info("Data berhasil di tambahkan");
+                $('#myTab li:first-child a').tab('show')
+                $scope.model = {};
+                $scope.model.driverLicense = {};
+                $scope.model.assdriverLicense = {};
+                $scope.model.vehicleRegistration = {};
+                $scope.model.keurDLLAJR = {};
+                $scope.model.assdriverIDCard = {};
+                $scope.model.driverIDCard = {};
+            })
         } else {
             KendaraanServices.post($scope.model).then(x => {
-
+                message.info("Data berhasil di tambahkan");
+                $('#myTab li:li:first-child a').tab('show')
+                $scope.model = {};
+                $scope.model.driverLicense = {};
+                $scope.model.assdriverLicense = {};
+                $scope.model.vehicleRegistration = {};
+                $scope.model.keurDLLAJR = {};
+                $scope.model.assdriverIDCard = {};
+                $scope.model.driverIDCard = {};
             })
         }
+    }
+    $scope.edit = (item) => {
+        $('#myTab li:last-child a').tab('show')
+        $scope.model = {};
+        $scope.model = item
+        $scope.model.driverLicense.berlaku = new Date($scope.model.driverLicense.berlaku);
+        $scope.model.driverLicense.hingga = new Date($scope.model.driverLicense.hingga);
+        $scope.model.assdriverLicense.berlaku = new Date($scope.model.assdriverLicense.berlaku);
+        $scope.model.assdriverLicense.hingga = new Date($scope.model.assdriverLicense.hingga);
+        $scope.model.vehicleRegistration.berlaku = new Date($scope.model.vehicleRegistration.berlaku);
+        $scope.model.vehicleRegistration.hingga = new Date($scope.model.vehicleRegistration.hingga);
+        $scope.model.keurDLLAJR.berlaku = new Date($scope.model.keurDLLAJR.berlaku);
+        $scope.model.keurDLLAJR.hingga = new Date($scope.model.keurDLLAJR.hingga);
+        $scope.model.assdriverIDCard.berlaku = new Date($scope.model.assdriverIDCard.berlaku);
+        $scope.model.assdriverIDCard.hingga = new Date($scope.model.assdriverIDCard.hingga);
+        $scope.model.driverIDCard.berlaku = new Date($scope.model.driverIDCard.berlaku);
+        $scope.model.driverIDCard.hingga = new Date($scope.model.driverIDCard.hingga);
+        $scope.model.carCreated = $scope.model.carCreated.toString();
+        console.log($scope.model);
     }
 }
 
@@ -109,7 +144,7 @@ function pengajuanController($scope, PengajuanServices) {
 
 }
 
-function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices) {
+function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state) {
     $scope.url = helperServices.base;
     $scope.jenisPengajuan = helperServices.jenisPengajuan;
     $scope.kendaraan = [];
@@ -131,12 +166,13 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
         })
     })
     $scope.setItem = (item) => {
-        var data = {};
-        data.truckId = item.id;
-        data.attackStatus = item.attackStatus;
-        data.pengajuanId;
+        item.truckId = angular.copy(item.id);
+        item.attackStatus = item.attackStatus;
+        item.pengajuanId;
+        delete item.id;
         // data.truck = item;
-        $scope.model.items.push(angular.copy(data));
+        $scope.model.items.push(angular.copy(item));
+        console.log($scope.model.items);
     }
     $scope.deleteItem = (item) => {
         var index = $scope.model.items.indexOf(item);
@@ -150,7 +186,8 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
             })
         } else {
             PengajuanServices.post($scope.model).then(x => {
-
+                message.info('Berhasil');
+                $state.go("pengajuan");
             })
         }
     }
