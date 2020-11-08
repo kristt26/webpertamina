@@ -13,39 +13,45 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <label for="iduser" class="control-label">ID User</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ID User" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default" autofocus>
-                    </div>
-                    <label for="iduser" class="control-label">Nama</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nama" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <label for="iduser" class="control-label">Email</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="email" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <label for="iduser" class="control-label">Kontak</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Kontak" aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <label for="">Sebagai</label>
-                    <div class="input-group sm-3">
-                        <!-- <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                        </div> -->
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option selected>Pilih...</option>
-                            <option value="1">Admin Perusahaan</option>
-                            <option value="2">Approve 1</option>
-                            <option value="3">HSE</option>
-                            <option value="3">Manager</option>
-                        </select>
-                    </div>
+                    <form ng-submit="save(model)">
+                        <label for="iduser" class="control-label">Username</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" ng-model="model.userName" required
+                                placeholder="Username" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                                autofocus>
+                        </div>
+                        <label for="iduser" class="control-label">First Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" ng-model="model.firstName" required
+                                placeholder="First Name" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <label for="iduser" class="control-label">Last Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" ng-model="model.lastName" required
+                                placeholder="Last Name" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <label for="iduser" class="control-label">Email</label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" ng-model="model.email" required placeholder="email"
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <label ng-if="simpan" for="iduser" class="control-label">Password</label>
+                        <div class="input-group mb-3" ng-if="simpan">
+                            <input type="password" class="form-control" ng-model="model.password" placeholder="Password"
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <label ng-if="simpan" for="">Sebagai</label>
+                        <div class="input-group sm-3" ng-if="simpan">
+                            <select ui-select2 class="form-control" ng-options="item as item for item in roles"
+                                ng-model="model.roles">
+                            </select>
+                        </div><br>
+                        <div class="input-group mb-3">
+                            <button type="submit" class="btn btn-primary pull-right">{{simpan?'Simpan':'Ubah'}}</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,14 +88,14 @@
                                     <td>{{item.email}}</td>
                                     <td>{{item.userRoles[0].role.name}}</td>
                                     <td>
-                                        <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
-                                        <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-warning btn-sm" ng-click="edit(item)"><i
+                                                class="fa fa-edit"></i> </a>
                                     </td>
                                     <td>
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch1"
-                                                ng-checked="item.status">
-                                            <label class="custom-control-label" for="customSwitch1"></label>
+                                            <input type="checkbox" class="custom-control-input" id="{{item.id}}"
+                                                ng-model="item.status" ng-checked="item.status" ng-change="save(item)">
+                                            <label class="custom-control-label" for="{{item.id}}"></label>
                                         </div>
                                     </td>
                                 </tr>
