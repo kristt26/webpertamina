@@ -16,7 +16,8 @@ angular.module("app", [
     "perusahaan.controller",
     "perusahaan.service",
     "naif.base64",
-    "datatables"
+    "datatables",
+    "ui.select2"
 
 
 ]).controller("homeController", homeController)

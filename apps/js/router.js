@@ -22,14 +22,14 @@ angular.module("app.router", ["ui.router"])
 
             .state('index', {
                 url: '/index',
-                controller: 'homeController',
+                controller: 'adminController',
                 templateUrl: 'apps/views/admin/index.html'
             })
 
             .state("home", {
                 url: '/home',
                 parent: 'index',
-                controller: "homeController",
+                controller: "adminController",
                 templateUrl: 'apps/views/admin/home.html'
             })
 

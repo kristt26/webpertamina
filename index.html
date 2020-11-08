@@ -32,6 +32,7 @@
 <script src="./node_modules/angular-route/angular-route.js"></script>
 <script src="./node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 <script src="./node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="./assets/plugins/angular-ui-select2/src/select2.js"></script>
 <script src="./apps/js/app.js"></script>
 <script src="./apps/js/router.js"></script>
 
@@ -74,6 +75,16 @@
             "autoWidth": false,
             "responsive": true,
         });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.select2').select2().on("change", function (e) { angular.element(document.getElementById("adminController")).scope().testfunction(); });
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        }).on("change", function (e) { angular.element(document.getElementById("adminController")).scope().testfunction(); });
     });
 </script>
 

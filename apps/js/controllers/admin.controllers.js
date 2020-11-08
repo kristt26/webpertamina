@@ -7,21 +7,41 @@ angular
     .controller('adminkim', adminkim)
     .controller('adminhistoritrukController', adminhistoritrukController);
 
-function adminController($scope, $state) {
+function adminController($scope, $state, AuthService) {
     if (!AuthService.userIsLogin()) {
         $state.go("login");
-    } else {
 
     }
-
 }
 
-function adminDaftarUserController($scope, DaftarUserServices) {
+function adminDaftarUserController($scope, DaftarUserServices, helperServices, message) {
+    $scope.roles = helperServices.roles;
     $scope.datas = [];
+    $scope.model = {};
     $scope.Title = 'Daftar User';
+    $scope.simpan = true;
     DaftarUserServices.get().then(x => {
         $scope.datas = x;
     });
+    $scope.edit = (item) => {
+        $scope.model = angular.copy(item);
+        $scope.simpan = false;
+    }
+    $scope.save = (item) => {
+        if (item.id) {
+            DaftarUserServices.put(item).then(x => {
+                message.info("User berhasil diubah");
+                $scope.model = {};
+                $scope.simpan = true;
+            })
+        } else {
+            DaftarUserServices.post(item).then(x => {
+                message.info("User berhasil ditambahkan");
+                $scope.model = {};
+                $scope.simpan = true;
+            })
+        }
+    }
 }
 
 
@@ -41,11 +61,15 @@ function adminlistpemeriksaanController($scope, ListPemeriksaanServices, message
     $scope.simpan = () => {
         if ($scope.model.id) {
             ListPemeriksaanServices.put($scope.model).then(x => {
-
+                message.info("List Pemeriksaan Berhasil diubah");
+                $scope.model = {};
+                $scope.detail = {};
             })
         } else {
             ListPemeriksaanServices.post($scope.model).then(x => {
-
+                message.info("List Pemeriksaan Berhasil disimpan");
+                $scope.model = {};
+                $scope.detail = {};
             })
         }
     }
