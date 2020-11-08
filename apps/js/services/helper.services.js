@@ -1,6 +1,5 @@
 angular.module("helper.service", [])
-    .factory("helperServices", helperServices)
-    ;
+    .factory("helperServices", helperServices);
 
 
 function helperServices() {
