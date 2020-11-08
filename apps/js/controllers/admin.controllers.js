@@ -1,21 +1,12 @@
 angular
     .module('admin.controller', [])
-    .controller('adminController', adminController)
     .controller('adminDaftarUserController', adminDaftarUserController)
     .controller('adminlistpemeriksaanController', adminlistpemeriksaanController)
     .controller('adminpersetujuankimController', adminpersetujuankimController)
     .controller('adminkim', adminkim)
     .controller('adminhistoritrukController', adminhistoritrukController);
 
-function adminController($scope, $state, AuthService) {
-    if (!AuthService.userIsLogin()) {
-        $state.go("login");
 
-    } else {
-
-    }
-
-}
 
 function adminDaftarUserController($scope, DaftarUserServices, helperServices, message) {
     $scope.roles = helperServices.roles;
