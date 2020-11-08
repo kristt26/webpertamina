@@ -8,6 +8,10 @@
                 <div>
                     <i class="fa fa-table mr-1"></i> List Pemeriksaan
                 </div>
+                <div>
+                    <a ui-sref="pengajuan" class="btn btn-secondary btn-sm"><i class="fa pulseWarningIns"></i><i
+                            class="fa fa-sign-in fa-lg fa-fw"></i> Kembali</a>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -65,28 +69,33 @@
                         <tbody>
                             <tr ng-repeat="item in model.items">
                                 <td>{{$index+1}}</td>
-                                <td>{{item.plateNumber}}</td>
-                                <td>{{item.driverName}}</td>
-                                <td>{{item.assdriverName}}</td>
+                                <td>{{item.truck.plateNumber}}</td>
+                                <td>{{item.truck.driverName}}</td>
+                                <td>{{item.truck.assdriverName}}</td>
                                 <td>
                                     <ol>
-                                        <li><a href="{{url+item.vehicleRegistration}}" target="_blank">File
+                                        <li><a href="{{url+item.truck.vehicleRegistration.document}}"
+                                                target="_blank">File
                                                 STNK</a>
-                                        <li><a href="{{url+item.keurDLLAJR}}" target="_blank">File KIR</a>
+                                        <li><a href="{{url+item.truck.keurDLLAJR.document}}" target="_blank">File
+                                                KIR</a>
                                     </ol>
                                 </td>
                                 <td>
                                     <ol>
-                                        <li><a href="{{url+item.driverIDCard}}" target="_blank">KTP</a>
-                                        <li><a href="{{url+item.driverLicense}}" target="_blank">SIM</a>
-                                        <li><a href="{{url+item.driverPhoto}}" target="_blank">Photo</a>
+                                        <li><a href="{{url+item.truck.driverIDCard.document}}" target="_blank">KTP</a>
+                                        <li><a href="{{url+item.truck.driverLicense.document}}" target="_blank">SIM</a>
+                                        <li><a href="{{url+item.truck.driverPhoto.document}}" target="_blank">Photo</a>
                                     </ol>
                                 </td>
                                 <td>
                                     <ol>
-                                        <li><a href="{{url+item.assdriverIDCard}}" target="_blank">KTP</a>
-                                        <li><a href="{{url+item.assdriverLicense}}" target="_blank">SIM</a>
-                                        <li><a href="{{url+item.assdriverPhoto}}" target="_blank">Photo</a>
+                                        <li><a href="{{url+item.truck.assdriverIDCard.document}}"
+                                                target="_blank">KTP</a>
+                                        <li><a href="{{url+item.truck.assdriverLicense.document}}"
+                                                target="_blank">SIM</a>
+                                        <li><a href="{{url+item.truck.assdriverPhoto.document}}"
+                                                target="_blank">Photo</a>
                                     </ol>
                                 </td>
                                 <td>{{item.attackStatus}}</td>

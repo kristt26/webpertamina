@@ -117,7 +117,13 @@ angular.module("app.router", ["ui.router"])
             })
 
             .state("tambahpengajuan", {
-                url: '/tambahpengajuan',
+                url: '/tambahpengajuan/:id',
+                params: {
+                    id: {
+                        value: null,
+                        squash: false,
+                    }
+                },
                 parent: 'perusahaan',
                 controller: "tambahPengajuanController",
                 templateUrl: 'apps/views/perusahaan/tambahpengajuan.html'

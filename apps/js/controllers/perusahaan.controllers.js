@@ -144,9 +144,10 @@ function pengajuanController($scope, PengajuanServices) {
 
 }
 
-function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state) {
+function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state, $stateParams) {
     $scope.url = helperServices.base;
     $scope.jenisPengajuan = helperServices.jenisPengajuan;
+    $scope.id = $stateParams.id;
     $scope.kendaraan = [];
     $scope.model = {};
     $scope.model.items = []
@@ -154,15 +155,21 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
         $scope.kendaraan = x;
         $scope.model.companyId = $scope.kendaraan[0].company.id;
         PengajuanServices.get().then(itemPengajuan => {
-            var d = new Date();
-            if (itemPengajuan.length == 0) {
-                $scope.model.letterNumber = "1/" + $scope.kendaraan[0].company.name.toLowerCase().replace(/\s/g, '') + "/" + ("0" + d.getDate()).slice(-2) + "/" + d.getFullYear();
+            if ($stateParams.id == null) {
+                var d = new Date();
+                if (itemPengajuan.length == 0) {
+                    $scope.model.letterNumber = "1/" + $scope.kendaraan[0].company.name.toUpperCase().replace(/\s/g, '') + "/" + helperServices.toRoman(d.getDate()) + "/" + d.getFullYear();
+                } else {
+                    var itemnomor = itemPengajuan[itemPengajuan.length - 1];
+                    var arraynomor = itemnomor.letterNumber.split('/');
+                    $scope.model.letterNumber = (parseInt(arraynomor[0]) + 1) + "/" + $scope.kendaraan[0].company.name.toUpperCase().replace(/\s/g, '') + "/" + helperServices.toRoman(d.getDate()) + "/" + d.getFullYear()
+                }
+                console.log($scope.model.letterNumber);
             } else {
-                var itemnomor = itemPengajuan[itemPengajuan.length - 1];
-                var arraynomor = itemnomor.letterNumber.split('/');
-                $scope.model.letterNumber = (parseInt(arraynomor[0]) + 1) + "/" + $scope.kendaraan[0].company.name.toLowerCase().replace(/\s/g, '') + "/" + ("0" + d.getDate()).slice(-2) + "/" + d.getFullYear()
+                $scope.model = itemPengajuan.find(datapengajuan => datapengajuan.id = $stateParams.id);
+                console.log($scope.model);
             }
-            console.log($scope.model.letterNumber);
+
         })
     })
     $scope.setItem = (item) => {
