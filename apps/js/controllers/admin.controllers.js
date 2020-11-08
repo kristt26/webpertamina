@@ -10,6 +10,7 @@ angular
 function adminController($scope, $state, AuthService) {
     if (!AuthService.userIsLogin()) {
         $state.go("login");
+
     } else {
 
     }
