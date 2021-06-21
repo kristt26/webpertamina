@@ -23,7 +23,9 @@ function companyController($scope, ProfilePerusahaanServices, message, $state, A
             });
         })
     };
-
+    $scope.logout = () => {
+        AuthService.logOff();
+    }
 }
 
 function dashboardController($scope, DaftarUserServices) {
@@ -103,7 +105,7 @@ function kendaraanController($scope, KendaraanServices, helperServices, message)
         } else {
             KendaraanServices.post($scope.model).then(x => {
                 message.info("Data berhasil di tambahkan");
-                $('#myTab li:li:first-child a').tab('show')
+                $('#myTab li:first-child a').tab('show')
                 $scope.model = {};
                 $scope.model.driverLicense = {};
                 $scope.model.assdriverLicense = {};
@@ -141,7 +143,9 @@ function pengajuanController($scope, PengajuanServices) {
     PengajuanServices.get().then(x => {
         $scope.datas = x;
     })
-
+    $scope.deleteItem = (item) => {
+        message.info('Berhasil');
+    }
 }
 
 function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state, $stateParams) {
@@ -153,7 +157,10 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
     $scope.model.items = []
     KendaraanServices.get().then(x => {
         $scope.kendaraan = x;
-        $scope.model.companyId = $scope.kendaraan[0].company.id;
+        // console.log(x[0]);
+        // var test = atob(x[0].fileAssDriverLicense.data);
+        // console.log(test);
+        $scope.model.company = { id: $scope.kendaraan[0].company.id };
         PengajuanServices.get().then(itemPengajuan => {
             if ($stateParams.id == null) {
                 var d = new Date();
@@ -166,30 +173,39 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
                 }
                 console.log($scope.model.letterNumber);
             } else {
-                $scope.model = itemPengajuan.find(datapengajuan => datapengajuan.id = $stateParams.id);
+                $scope.model = itemPengajuan.find(datapengajuan => datapengajuan.id == $stateParams.id);
                 console.log($scope.model);
             }
-
         })
     })
     $scope.setItem = (item) => {
-        item.truckId = angular.copy(item.id);
-        item.attackStatus = item.attackStatus;
-        item.pengajuanId;
-        delete item.id;
-        // data.truck = item;
-        $scope.model.items.push(angular.copy(item));
-        console.log($scope.model.items);
+        if ($stateParams.id == null) {
+            item.truckId = angular.copy(item.id);
+            item.attackStatus = item.attackStatus;
+            item.pengajuanId;
+            delete item.id;
+            $scope.model.items.push(angular.copy(item));
+            console.log($scope.model);
+        } else {
+            item.attackStatus = item.attackStatus;
+            item.pengajuanId;
+            var truck = {};
+            truck.truck = item;
+            $scope.model.items.push(angular.copy(truck));
+            console.log($scope.model);
+        }
     }
     $scope.deleteItem = (item) => {
         var index = $scope.model.items.indexOf(item);
         $scope.model.items.splice(index, 1);
+        console.log($scope.model);
     }
     $scope.simpan = () => {
 
         if ($scope.model.id) {
             PengajuanServices.put($scope.model).then(x => {
-
+                message.info('Berhasil');
+                $state.go("pengajuan");
             })
         } else {
             PengajuanServices.post($scope.model).then(x => {

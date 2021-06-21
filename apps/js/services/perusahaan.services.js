@@ -218,7 +218,7 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
     service.data = [];
     service.instance = false;
     return {
-        get: get, post: post, put: put
+        get: get, post: post, put: put, deleted:deleted
     };
 
     function get() {
@@ -269,13 +269,32 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
         var def = $q.defer();
         $http({
             method: 'put',
-            url: controller + "/createsubmission",
+            url: controller + "/submission/" + params.id,
             data: params,
             headers: AuthService.getHeader()
         }).then(
             (res) => {
                 service.instance = true;
                 service.data.push(res.data);
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
+        return def.promise;
+    }
+    function deleted(params) {
+        var def = $q.defer();
+        $http({
+            method: 'delete',
+            url: controller + "/submission/" + params.id,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                var index = service.data.indexOf(params);
+                service.data.splice(index, 1);
                 def.resolve(res.data);
             },
             (err) => {

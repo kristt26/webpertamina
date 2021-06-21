@@ -90,13 +90,18 @@
                             </thead>
                             <tbody ng-repeat="item in datas">
                                 <tr>
-                                    <td scope="row" rowspan="{{item.items.length}}">
+                                    <td scope="row" rowspan="{{item.items.length+1}}">
                                         {{$index+1}}
                                     </td>
-                                    <td colspan="3" rowspan="{{item.items.length}}">
+                                    <td colspan="0" rowspan="{{item.items.length+1}}">
                                         {{item.name}}
                                     </td>
-                                    <td rowspan="{{item.items.length}}">
+                                    
+                                </tr>
+                                <tr ng-repeat="itemDetail in item.items">
+                                    <td>{{itemDetail.kelengkapan}}</td>
+                                    <td>{{itemDetail.penjelasan}}</td>
+                                    <td ng-if="$index==0" rowspan="{{item.items.length}}">
                                         <a class="btn btn-primary btn-sm" ng-show="item.detail"><i
                                                 class="fa fa-eye"></i> </a>
                                         <a class="btn btn-warning btn-sm" ng-click="ubah(item)"><i
@@ -104,13 +109,7 @@
                                         <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
-                                <tr ng-repeat="itemDetail in item.items">
-                                    <td></td>
-                                    <td></td>
-                                    <td>{{itemDetail.kelengkapan}}</td>
-                                    <td>{{itemDetail.penjelasan}}</td>
-
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

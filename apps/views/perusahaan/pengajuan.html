@@ -27,13 +27,13 @@
                         <tr ng-repeat="item in datas">
                             <td scope="row">{{$index+1}}</td>
                             <td>{{item.letterNumber}}</td>
-                            <td>{{item.created | date: 'EEEE, dd-mm-yyyy'}}</td>
+                            <td>{{item.created | date: 'EEEE, d MMMM y'}}</td>
                             <td>{{item.statusPengajuan}}</td>
                             <td width="15%">
-                                <a class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
-                                <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
-                                        class="fa fa-edit"></i> </a>
-                                <!-- <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> -->
+                                <a class="btn btn-info btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i class="fa fa-eye"></i> </a>
+                                <!-- <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
+                                        class="fa fa-edit"></i> </a> -->
+                                <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     </tbody>

@@ -52,62 +52,101 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-hover ; text-justify" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>No. Polisi</th>
-                                <th>Supir</th>
-                                <th>Kernet</th>
-                                <th>Berkas Truk</th>
-                                <th>Berkas Supir</th>
-                                <th>Berkas Kernet</th>
-                                <th>Jenis Pengajuan</th>
-                                <th><i class="fa fa-gear"></i></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="item in model.items">
-                                <td>{{$index+1}}</td>
-                                <td>{{item.truck.plateNumber}}</td>
-                                <td>{{item.truck.driverName}}</td>
-                                <td>{{item.truck.assdriverName}}</td>
-                                <td>
-                                    <ol>
-                                        <li><a href="{{url+item.truck.vehicleRegistration.document}}"
-                                                target="_blank">File
-                                                STNK</a>
-                                        <li><a href="{{url+item.truck.keurDLLAJR.document}}" target="_blank">File
-                                                KIR</a>
-                                    </ol>
-                                </td>
-                                <td>
-                                    <ol>
-                                        <li><a href="{{url+item.truck.driverIDCard.document}}" target="_blank">KTP</a>
-                                        <li><a href="{{url+item.truck.driverLicense.document}}" target="_blank">SIM</a>
-                                        <li><a href="{{url+item.truck.driverPhoto.document}}" target="_blank">Photo</a>
-                                    </ol>
-                                </td>
-                                <td>
-                                    <ol>
-                                        <li><a href="{{url+item.truck.assdriverIDCard.document}}"
-                                                target="_blank">KTP</a>
-                                        <li><a href="{{url+item.truck.assdriverLicense.document}}"
-                                                target="_blank">SIM</a>
-                                        <li><a href="{{url+item.truck.assdriverPhoto.document}}"
-                                                target="_blank">Photo</a>
-                                    </ol>
-                                </td>
-                                <td>{{item.attackStatus}}</td>
-                                <td>
-                                    <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
-                                            class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                        <!-- <?php endforeach; ?> -->
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-hover ; text-justify" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>No. Polisi</th>
+                                    <th>Supir</th>
+                                    <th>Kernet</th>
+                                    <th>Berkas Truk</th>
+                                    <th>Berkas Supir</th>
+                                    <th>Berkas Kernet</th>
+                                    <th>Jenis Pengajuan</th>
+                                    <!-- <th><i class="fa fa-gear"></i></th> -->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in model.items" ng-if="model.id">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.truck.plateNumber}}</td>
+                                    <td>{{item.truck.driverName}}</td>
+                                    <td>{{item.truck.assdriverName}}</td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.truck.vehicleRegistration.document}}"
+                                                    target="_blank">File
+                                                    STNK</a>
+                                            <li><a href="{{url+item.truck.keurDLLAJR.document}}" target="_blank">File
+                                                    KIR</a>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.truck.driverIDCard.document}}" target="_blank">KTP</a>
+                                            <li><a href="{{url+item.truck.driverLicense.document}}" target="_blank">SIM</a>
+                                            <li><a href="{{url+item.truck.driverPhoto.document}}" target="_blank">Photo</a>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.truck.assdriverIDCard.document}}"
+                                                    target="_blank">KTP</a>
+                                            <li><a href="{{url+item.truck.assdriverLicense.document}}"
+                                                    target="_blank">SIM</a>
+                                            <li><a href="{{url+item.truck.assdriverPhoto.document}}"
+                                                    target="_blank">Photo</a>
+                                        </ol>
+                                    </td>
+                                    <td>{{item.attackStatus}}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="item in model.items" ng-if="!model.id">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{item.plateNumber}}</td>
+                                    <td>{{item.driverName}}</td>
+                                    <td>{{item.assdriverName}}</td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.vehicleRegistration.document}}"
+                                                    target="_blank">File
+                                                    STNK</a>
+                                            <li><a href="{{url+item.keurDLLAJR.document}}" target="_blank">File
+                                                    KIR</a>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.driverIDCard.document}}" target="_blank">KTP</a>
+                                            <li><a href="{{url+item.driverLicense.document}}" target="_blank">SIM</a>
+                                            <li><a href="{{url+item.driverPhoto}}" target="_blank">Photo</a>
+                                        </ol>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li><a href="{{url+item.assdriverIDCard.document}}"
+                                                    target="_blank">KTP</a>
+                                            <li><a href="{{url+item.assdriverLicense.document}}"
+                                                    target="_blank">SIM</a>
+                                            <li><a href="{{url+item.assdriverPhoto}}"
+                                                    target="_blank">Photo</a>
+                                        </ol>
+                                    </td>
+                                    <td>{{item.attackStatus}}</td>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
+                                                class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+    
+                            </tbody>
+                            <!-- <?php endforeach; ?> -->
+                        </table>
+                    </div>
 
                 </div>
                 <div class="card-body">

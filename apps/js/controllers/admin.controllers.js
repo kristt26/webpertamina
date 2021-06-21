@@ -12,6 +12,9 @@ function adminController($scope, $state, AuthService) {
         $state.go("login");
 
     }
+    $scope.logout = ()=>{
+        AuthService.logOff();
+    }
 }
 
 function adminDaftarUserController($scope, DaftarUserServices, helperServices, message) {

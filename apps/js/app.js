@@ -17,7 +17,8 @@ angular.module("app", [
     "perusahaan.service",
     "naif.base64",
     "datatables",
-    "ui.select2"
+    "ui.select2",
+    "ngLocale"
 
 
 ]).controller("homeController", homeController)
