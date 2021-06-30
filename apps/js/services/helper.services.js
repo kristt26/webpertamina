@@ -4,8 +4,8 @@ angular.module("helper.service", [])
 
 function helperServices() {
     var service = {};
-    service.url = "http://192.168.1.2/api/";
-    service.base = "http://192.168.1.2/";
+    service.url = "http://192.168.1.12/api/";
+    service.base = "http://192.168.1.12/";
     // service.url = "http://36.94.6.214/api/";
     // service.base = "http://36.94.6.214/";
     service.jenisPengajuan = ['Baru', 'Perpanjangan'];

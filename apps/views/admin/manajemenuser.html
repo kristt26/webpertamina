@@ -35,12 +35,12 @@
                         <label for="iduser" class="control-label">Email</label>
                         <div class="input-group mb-3">
                             <input type="email" class="form-control" ng-model="model.email" required placeholder="email"
-                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
                         </div>
                         <label ng-if="simpan" for="iduser" class="control-label">Password</label>
                         <div class="input-group mb-3" ng-if="simpan">
                             <input type="password" class="form-control" ng-model="model.password" placeholder="Password"
-                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default" required>
                         </div>
                         <label ng-if="simpan" for="">Sebagai</label>
                         <div class="input-group sm-3" ng-if="simpan">

@@ -6,22 +6,27 @@ angular
     .controller('kendaraanController', kendaraanController)
     .controller('pengajuanController', pengajuanController)
     .controller('tambahPengajuanController', tambahPengajuanController)
-    .controller('pejabatController', pejabatController)
+    .controller('kimsController', kimsController)
     ;
 
-function companyController($scope, ProfilePerusahaanServices, message, $state, AuthService) {
+function companyController($scope, ProfilePerusahaanServices, message, $state, AuthService, helperServices) {
     $scope.profile = {};
     if (!AuthService.userIsLogin()) {
         $state.go("login");
     } else {
-        ProfilePerusahaanServices.get().then(x => {
-            $scope.$emit("SendDown", "true");
-            $scope.profile = x;
-        }, err => {
-            message.dialogmessage("Mohon isi Profile terlebih dahulu").then(x => {
-                $state.go("profileperusahaan");
-            });
-        })
+        $scope.profile = AuthService.getProfile();
+        if(!$scope.profile){
+            ProfilePerusahaanServices.get().then(x => {
+                // $scope.$emit("SendDown", "true");
+                $scope.profile = x;
+                $scope.profile.logo = helperServices.base+$scope.profile.logo;
+                AuthService.addProfile($scope.profile);
+            }, (err)=>{
+                message.dialogmessage("Mohon isi Profile terlebih dahulu").then(x => {
+                    $state.go("profileperusahaan");
+                });
+            })
+        }
     };
     $scope.logout = () => {
         AuthService.logOff();
@@ -36,7 +41,7 @@ function dashboardController($scope, DaftarUserServices) {
     });
 }
 
-function profilePerusahaanController($scope, helperServices, message, $rootScope, ProfilePerusahaanServices) {
+function profilePerusahaanController($scope, helperServices, message, AuthService, StorageService, ProfilePerusahaanServices) {
     $scope.url = helperServices.base;
     $scope.statusProfile = false;
     $scope.test;
@@ -48,19 +53,29 @@ function profilePerusahaanController($scope, helperServices, message, $rootScope
         $scope.statusProfile = false;
     })
     $scope.simpan = () => {
-        var photo = {};
-        var ext = $scope.model.logoData.filename.split(".");
-        photo.fileExtention = ext[1];
-        photo.fileType = "Photo";
-        photo.fileName = $scope.model.logoData.filename;
-        photo.data = $scope.model.logoData.base64;
-        $scope.model.logoData = photo;
+        // var photo = {};
+        // var ext = $scope.model.logoData.filename.split(".");
+        // photo.fileExtention = ext[1];
+        // photo.fileType = "Photo";
+        // photo.fileName = $scope.model.logoData.filename;
+        // photo.data = $scope.model.logoData.data;
+        // $scope.model.logoData = photo;
         if ($scope.model.id) {
             ProfilePerusahaanServices.put($scope.model).then(x => {
-
+                message.dialogconfirm("Profile Perusahaan telah di perbaharui!!! Silahkan Login Ulang untuk melanjutkan", "OK").then(x=>{
+                    AuthService.logOff()
+                })
+                // message.info("Berhasil");
+                // $scope.statusProfile = true;
+                // $scope.model.logo = x.logo;
+                // StorageService.remove("profile");
+                // AuthService.addProfile(x);
             })
         } else {
             ProfilePerusahaanServices.post($scope.model).then(x => {
+                message.dialogconfirm("Profile Perusahaan telah dibuat!!! Silahkan Login Ulang Untuk Melanjutkan", "OK").then(x=>{
+                    AuthService.logOff()
+                })
                 message.info("Berhasil Menyimpan");
             })
         }
@@ -68,6 +83,9 @@ function profilePerusahaanController($scope, helperServices, message, $rootScope
     }
     $scope.edit = () => {
         $scope.statusProfile = false;
+    }
+    $scope.showDataLogo = (item)=>{
+        console.log(item);
     }
 }
 
@@ -137,14 +155,16 @@ function kendaraanController($scope, KendaraanServices, helperServices, message)
     }
 }
 
-function pengajuanController($scope, PengajuanServices) {
+function pengajuanController($scope, PengajuanServices, message) {
     $scope.datas = [];
 
     PengajuanServices.get().then(x => {
         $scope.datas = x;
     })
     $scope.deleteItem = (item) => {
-        message.info('Berhasil');
+        PengajuanServices.deleted(item).then(result=>{
+            message.info('Berhasil');
+        })
     }
 }
 
@@ -160,7 +180,7 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
         // console.log(x[0]);
         // var test = atob(x[0].fileAssDriverLicense.data);
         // console.log(test);
-        $scope.model.company = { id: $scope.kendaraan[0].company.id };
+        $scope.model.company = { id: $scope.kendaraan[0].companyId };
         PengajuanServices.get().then(itemPengajuan => {
             if ($stateParams.id == null) {
                 var d = new Date();
@@ -180,11 +200,8 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
     })
     $scope.setItem = (item) => {
         if ($stateParams.id == null) {
-            item.truckId = angular.copy(item.id);
-            item.attackStatus = item.attackStatus;
-            item.pengajuanId;
-            delete item.id;
-            $scope.model.items.push(angular.copy(item));
+            var itemPengajuan = {truck: item,}
+            $scope.model.items.push(itemPengajuan);
             console.log($scope.model);
         } else {
             item.attackStatus = item.attackStatus;
@@ -201,7 +218,7 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
         console.log($scope.model);
     }
     $scope.simpan = () => {
-
+        console.log($scope.model);
         if ($scope.model.id) {
             PengajuanServices.put($scope.model).then(x => {
                 message.info('Berhasil');
@@ -215,7 +232,7 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
         }
     }
 }
-function pejabatController($scope, helperServices) {
+function kimsController($scope, helperServices) {
     $scope.simpan = () => {
         if ($scope.model.id) {
             PengajuanServices.put($scope.model).then(x => {

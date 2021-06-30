@@ -100,12 +100,30 @@ function adminlistpemeriksaanController($scope, ListPemeriksaanServices, message
 }
 
 
-function adminpersetujuankimController($scope, PersetujuanKimServices) {
+function adminpersetujuankimController($scope, PersetujuanKimServices, message) {
     $scope.datas = [];
+    $scope.model = {};
     $scope.Title = 'Persetujuan KIM';
     PersetujuanKimServices.get().then(x => {
         $scope.datas = x;
     })
+    $scope.setDataKim = (item)=>{
+        $scope.model.id = 0;
+        $scope.model.pengajuan = item.id;
+        $scope.model.truck = item.truck;
+    }
+    $scope.save = (item)=>{
+        var data = angular.copy(item);
+        
+        data.beginDate = new Date(item.beginDate);
+        data.endDate = new Date(item.endDate);
+        console.log(data);
+        message.dialogmessage("Anda Yakin").then(x=>{
+            PersetujuanKimServices.post(data).then(res=>{
+                message.info("proses Berhasil");
+            })
+        });
+    }
 }
 
 function adminkim($scope) {

@@ -245,7 +245,7 @@ function PersetujuanKimServices($http, $q, StorageService, $state, helperService
     service.data = [];
     service.instance = false;
     return {
-        get: get
+        get: get, post: post
     };
 
     function get() {
@@ -269,6 +269,29 @@ function PersetujuanKimServices($http, $q, StorageService, $state, helperService
                 }
             );
         }
+        return def.promise;
+    }
+    function post(param) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + "/CreateKim/" + param.pengajuan,
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                var data = service.data.find(x=>x.id == param.pengajuan);
+                if(data){
+                    var index = service.data.indexOf(data);
+                    service.data.splice(index, 1);
+                }
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
         return def.promise;
     }
 }

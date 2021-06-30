@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-table mr-1"></i> Daftar Pengajuan Berkas KIM
+                </div>
+                <div>
+                    <a ui-sref="tambahpengajuan" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>Tambah</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover ; text-justify" datatable="ng" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nomor Surat</th>
+                            <th scope="col">Tanggal Pengajuan</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
+                    <tbody>
+                        <tr ng-repeat="item in datas">
+                            <td scope="row">{{$index+1}}</td>
+                            <td>{{item.letterNumber}}</td>
+                            <td>{{item.created | date: 'EEEE, d MMMM y'}}</td>
+                            <td>{{item.statusPengajuan}}</td>
+                            <td width="15%">
+                                <a class="btn btn-info btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i class="fa fa-eye"></i> </a>
+                                <!-- <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
+                                        class="fa fa-edit"></i> </a> -->
+                                <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- <?php endforeach; ?> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

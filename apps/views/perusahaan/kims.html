@@ -1,0 +1,42 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-table mr-1"></i> Daftar User
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover ; text-justify" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Sebagai</th>
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
+                    <tbody>
+                        <tr ng-repeat="item in datas">
+                            <th scope="row">
+                                {{$index+1}}
+                            </th>
+                            <td>{{item.userName}}</td>
+                            <td>{{item.firstName}} {{item.lastName}}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{item.userRoles[0].role.name}}</td>
+                        </tr>
+                    </tbody>
+                    <!-- <?php endforeach; ?> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@
                 </div>
                 <div>
                     <a ui-sref="tambahlistpemeriksaan" class="btn btn-success btn-sm"><i
-                            class="fa pulseWarningIns"></i>Tambah</a>
+                            class="fa pulseWarningIns"></i>Tambah/Edit</a>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
                             <th scope="col">Kategori</th>
                             <th scope="col">Kelengkapan</th>
                             <th scope="col">Penjelasan</th>
-                            <th scope="col">Action</th>
+                            <!-- <th scope="col">Action</th> -->
                         </tr>
                     </thead>
                     <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
@@ -41,10 +41,10 @@
                                     <li ng-repeat="detail in item.items">{{detail.penjelasan}}</li>
                                 </ol>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a>
                                 <a class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> </a>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                     <!-- <?php endforeach; ?> -->

@@ -25,7 +25,7 @@ function CompanyServices($http, $q, helperServices, AuthService, message) {
                 headers: AuthService.getHeader()
             }).then(
                 (res) => {
-                    service.instance = true;
+                    service.instance = false;
                     service.data = res.data;
                     def.resolve(res.data);
                 },
@@ -62,7 +62,7 @@ function CompanyServices($http, $q, helperServices, AuthService, message) {
 
 }
 
-function ProfilePerusahaanServices($http, $q, helperServices, AuthService) {
+function ProfilePerusahaanServices($http, $q, helperServices, AuthService, message) {
     var controller = helperServices.url + 'companyadministrator';
     var service = {};
     service.data = [];
@@ -82,7 +82,7 @@ function ProfilePerusahaanServices($http, $q, helperServices, AuthService) {
                 headers: AuthService.getHeader()
             }).then(
                 (res) => {
-                    service.instance = true;
+                    service.instance = false;
                     service.data = res.data;
                     def.resolve(res.data);
                 },
@@ -103,7 +103,7 @@ function ProfilePerusahaanServices($http, $q, helperServices, AuthService) {
             headers: AuthService.getHeader()
         }).then(
             (res) => {
-                service.data.push(res.data);
+                service.data =res.data;
                 def.resolve(res.data);
             },
             (err) => {
@@ -123,7 +123,7 @@ function ProfilePerusahaanServices($http, $q, helperServices, AuthService) {
             headers: AuthService.getHeader()
         }).then(
             (res) => {
-                service.data.push(res.data);
+                service.data = res.data;
                 def.resolve(res.data);
             },
             (err) => {
@@ -155,7 +155,7 @@ function KendaraanServices($http, $q, helperServices, AuthService, message) {
                 headers: AuthService.getHeader()
             }).then(
                 (res) => {
-                    service.instance = true;
+                    service.instance = false;
                     service.data = res.data;
                     def.resolve(res.data);
                 },
@@ -232,7 +232,7 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
                 headers: AuthService.getHeader()
             }).then(
                 (res) => {
-                    service.instance = true;
+                    service.instance = false;
                     service.data = res.data;
                     def.resolve(res.data);
                 },

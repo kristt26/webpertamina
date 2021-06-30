@@ -8,6 +8,8 @@ function LoginController($scope, $state, AuthService) {
     AuthService.login(user).then(x => {
       if (x.roles[0] == "Company") {
         $state.go("perusahaan");
+      } else if(x.roles[0] == "Approval1"){
+        $state.go("approval");
       } else {
         $state.go("index");
       }

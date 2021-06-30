@@ -8,7 +8,7 @@ angular.module("auth.service", [])
 
 
 
-function AuthService($http, $q, StorageService, $state, helperServices) {
+function AuthService($http, $q, StorageService, $state, helperServices, message) {
 
     var service = {};
 
@@ -21,7 +21,9 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
         userInRole: userInRole,
         getHeader: getHeader,
         getToken: getToken,
-        getUserId: getUserId
+        getUserId: getUserId,
+        addProfile : addProfile,
+        getProfile : getProfile
     }
 
     function login(user) {
@@ -41,14 +43,10 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
             def.resolve(user);
         }, err => {
             def.reject(err);
-            message.error(err);
+            message.error(err.data);
         });
         return def.promise;
     }
-
-
-
-
 
     function getHeader() {
 
@@ -86,6 +84,7 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
             return result.token;
         }
     }
+
     function getUserId() {
         if (userIsLogin) {
             var result = StorageService.getObject("user");
@@ -107,7 +106,15 @@ function AuthService($http, $q, StorageService, $state, helperServices) {
             return true;
         }
     }
+    
+    function addProfile(profile) {
+        StorageService.addObject("profile", profile);
+    }
 
-
-
+    function getProfile() {
+        var result = StorageService.getObject("profile");
+        if (result) {
+            return result;
+        }
+    }
 }

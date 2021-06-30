@@ -91,7 +91,7 @@ function StorageService(localStorageService) {
   // remove value from storage
   function remove(key) {
     if (localStorageSupported) {
-      localStorage.removeItem(key);
+      localStorage.remove(key);
     }
   }
 

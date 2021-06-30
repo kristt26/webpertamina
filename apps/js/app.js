@@ -15,10 +15,14 @@ angular.module("app", [
     "admin.service",
     "perusahaan.controller",
     "perusahaan.service",
+    "approval.controller",
+    "approval.service",
     "naif.base64",
     "datatables",
     "ui.select2",
-    "ngLocale"
+    "ngLocale",
+    "ui.utils.masks",
+    "720kb.datepicker"
 
 
 ]).controller("homeController", homeController)

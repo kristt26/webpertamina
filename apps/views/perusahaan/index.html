@@ -35,7 +35,7 @@
     <header class="app-header">
         <a class="app-header__logo" href="index.html"><img src="./assets/images/Logo.png" width="60%" alt=""></a>
         <!-- Sidebar toggle button-->
-        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        <!-- <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a> -->
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
             <!-- User Menu-->
@@ -55,10 +55,10 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
-                src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+                ng-src="{{profile.logo}}" alt="User Image" width="75px">
             <div>
-                <p class="app-sidebar__user-name">Administrator</p>
-                <p class="app-sidebar__user-designation">PT. Pertamina</p>
+                <!-- <p class="app-sidebar__user-name">Administrator</p> -->
+                <p class="app-sidebar__user-designation">{{profile.name}}</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -67,13 +67,13 @@
             <li><a class="app-menu__item" ui-sref="profileperusahaan"><i class="app-menu__icon fa fa-user-o"></i><span
                         class="app-menu__label">Perusahaan</span></a>
             </li>
-            <li><a class="app-menu__item" ui-sref="kendaraan"><i class="app-menu__icon fa fa-file-text-o"></i><span
+            <li><a class="app-menu__item" ui-sref="kendaraan"><i class="app-menu__icon fa fa-car"></i><span
                         class="app-menu__label">Kendaraan</span></a></li>
             <li><a class="app-menu__item" ui-sref="pengajuan"><i class="app-menu__icon fa fa-file-text-o"></i><span
                         class="app-menu__label">Pengajuan Truk</span></a></li>
-            <li><a class="app-menu__item" ui-sref="pejabat"><i class="app-menu__icon fa fa-users"></i><span
-                        class="app-menu__label">Pejabat</span></a></li>
-            <li><a class="app-menu__item" ui-sref="pejabat"><i class="app-menu__icon fa fa-file-text-o"></i><span
+            <!-- <li><a class="app-menu__item" ui-sref="pejabat"><i class="app-menu__icon fa fa-users"></i><span
+                        class="app-menu__label">Pejabat</span></a></li> -->
+            <li><a class="app-menu__item" ui-sref="kims"><i class="app-menu__icon fa fa-id-card-o"></i><span
                         class="app-menu__label">KIM</span></a></li>
             <li><a class="app-menu__item" ui-sref="histori"><i class="app-menu__icon fa fa-history"></i><span
                         class="app-menu__label">Histori Truck</span></a></li>

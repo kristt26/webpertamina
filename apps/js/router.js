@@ -129,11 +129,18 @@ angular.module("app.router", ["ui.router"])
                 templateUrl: 'apps/views/perusahaan/tambahpengajuan.html'
             })
 
-            .state("pejabat", {
-                url: '/pejabat',
+            // .state("pejabat", {
+            //     url: '/pejabat',
+            //     parent: 'perusahaan',
+            //     controller: "pejabatController",
+            //     templateUrl: 'apps/views/perusahaan/pejabat.html'
+            // })
+
+            .state("kims", {
+                url: '/kims',
                 parent: 'perusahaan',
-                controller: "pejabatController",
-                templateUrl: 'apps/views/perusahaan/pejabat.html'
+                controller: "kimsController",
+                templateUrl: 'apps/views/perusahaan/kims.html'
             })
 
             .state("histori", {
@@ -147,6 +154,19 @@ angular.module("app.router", ["ui.router"])
                 parent: 'perusahaan',
                 controller: "adminhistoritrukController",
                 templateUrl: 'apps/views/admin/detailhistoritruk.html'
+            })
+
+            .state('approval', {
+                url: '/approval',
+                controller: 'approvalController',
+                templateUrl: 'apps/views/approval/index.html'
+            })
+
+            .state("pengajuanberkas", {
+                url: '/pengajuanberkas',
+                parent: 'approval',
+                controller: "pengajuanBerkasController",
+                templateUrl: 'apps/views/approval/pengajuan.html'
             })
 
             .state('about', {
