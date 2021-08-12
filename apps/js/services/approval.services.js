@@ -4,12 +4,12 @@ angular.module('approval.service', [])
     ;
 
 function approvalServices($http, $q, helperServices, AuthService, message) {
-    var controller = helperServices.url + 'companyadministrator';
+    var controller = helperServices.url + 'Approval';
     var service = {};
     service.data = [];
     service.instance = false;
     return {
-        get: get, createProfile: createProfile
+        get: get, post: post
     };
 
     function get() {
@@ -36,18 +36,16 @@ function approvalServices($http, $q, helperServices, AuthService, message) {
         return def.promise;
     }
 
-    function createProfile() {
+    function post(item) {
         var def = $q.defer();
         $http({
             method: 'post',
-            url: controller + "/createprofile",
+            url: controller + "/approve/" + item.id,
+            data: item.hasilPemeriksaan,
             headers: AuthService.getHeader()
         }).then(
             (res) => {
-                if (service.instance = true) {
-                } else {
-                    service.data = res.data;
-                }
+                
                 def.resolve(res.data);
             },
             (err) => {

@@ -61,6 +61,13 @@ angular.module("app.router", ["ui.router"])
                 templateUrl: 'apps/views/admin/tambahlistpemeriksaan.html'
             })
 
+            .state("berkaspengajuan", {
+                url: '/berkaspengajuan',
+                parent: 'index',
+                controller: "adminBerkasPengajuanController",
+                templateUrl: 'apps/views/admin/berkasPengajuan.html'
+            })
+
             .state("persetujuankim", {
                 url: '/persetujuankim',
                 parent: 'index',
@@ -71,8 +78,8 @@ angular.module("app.router", ["ui.router"])
             .state("kim", {
                 url: '/kim',
                 parent: 'index',
-                controller: "adminkimController",
-                templateUrl: 'apps/views/admin/kim.html'
+                controller: "adminKimController",
+                templateUrl: 'apps/views/admin/kims.html'
             })
 
             .state("historitruk", {
@@ -139,7 +146,7 @@ angular.module("app.router", ["ui.router"])
             .state("kims", {
                 url: '/kims',
                 parent: 'perusahaan',
-                controller: "kimsController",
+                controller: "perusahaanKimsController",
                 templateUrl: 'apps/views/perusahaan/kims.html'
             })
 

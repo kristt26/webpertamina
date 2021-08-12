@@ -1,9 +1,45 @@
 angular.module('admin.service', [])
+    .factory('dashboardServices', dashboardServices)
     .factory('DaftarUserServices', DaftarUserServices)
     .factory('ListPemeriksaanServices', ListPemeriksaanServices)
     .factory('AdministratorServices', AdministratorServices)
     .factory('PersetujuanKimServices', PersetujuanKimServices)
+    .factory('adminKimsServices', adminKimsServices)
     ;
+
+function dashboardServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
+    var controller = helperServices.url + 'Administrator';
+    var service = {};
+    service.data = [];
+    service.instance = false;
+    return {
+        get: get
+    };
+
+    function get() {
+        var def = $q.defer();
+        if (service.instance) {
+            def.resolve(service.data);
+        } else {
+            $http({
+                method: 'get',
+                url: controller + "/GetDashBoard",
+                headers: AuthService.getHeader()
+            }).then(
+                (res) => {
+                    service.instance = true;
+                    service.data = res.data;
+                    def.resolve(res.data);
+                },
+                (err) => {
+                    def.reject(err);
+                    message.error(err);
+                }
+            );
+        }
+        return def.promise;
+    }
+}
 
 function DaftarUserServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
     var controller = helperServices.url + 'users';
@@ -239,6 +275,7 @@ function AdministratorServices($http, $q, StorageService, $state, helperServices
         return def.promise;
     }
 }
+
 function PersetujuanKimServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
     var controller = helperServices.url + 'administrator';
     var service = {};
@@ -260,6 +297,63 @@ function PersetujuanKimServices($http, $q, StorageService, $state, helperService
             }).then(
                 (res) => {
                     service.instance = true;
+                    service.data = res.data;
+                    def.resolve(res.data);
+                },
+                (err) => {
+                    message.error(err.data);
+                    def.reject(err.data);
+                }
+            );
+        }
+        return def.promise;
+    }
+    function post(param) {
+        var def = $q.defer();
+        $http({
+            method: 'post',
+            url: controller + "/CreateKim/" + param.pengajuan,
+            data: param,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                var data = service.data.find(x=>x.id == param.pengajuan);
+                if(data){
+                    var index = service.data.indexOf(data);
+                    service.data.splice(index, 1);
+                }
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
+        return def.promise;
+    }
+}
+
+function adminKimsServices($http, $q, StorageService, $state, helperServices, AuthService, message) {
+    var controller = helperServices.url + 'administrator';
+    var service = {};
+    service.data = [];
+    service.instance = false;
+    return {
+        get: get, post: post
+    };
+
+    function get() {
+        var def = $q.defer();
+        if (service.instance) {
+            def.resolve(service.data);
+        } else {
+            $http({
+                method: 'get',
+                url: controller + "/GetKims",
+                headers: AuthService.getHeader()
+            }).then(
+                (res) => {
+                    // service.instance = true;
                     service.data = res.data;
                     def.resolve(res.data);
                 },

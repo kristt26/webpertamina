@@ -10,32 +10,43 @@ angular
     ;
 
 function companyController($scope, ProfilePerusahaanServices, message, $state, AuthService, helperServices) {
+    $scope.hideside = () => {
+        
+    }
     $scope.profile = {};
     if (!AuthService.userIsLogin()) {
         $state.go("login");
     } else {
         $scope.profile = AuthService.getProfile();
-        if(!$scope.profile){
+        if (!$scope.profile) {
             ProfilePerusahaanServices.get().then(x => {
                 // $scope.$emit("SendDown", "true");
                 $scope.profile = x;
-                $scope.profile.logo = helperServices.base+$scope.profile.logo;
+                $scope.profile.logo = helperServices.base + $scope.profile.logo;
                 AuthService.addProfile($scope.profile);
-            }, (err)=>{
+            }, (err) => {
                 message.dialogmessage("Mohon isi Profile terlebih dahulu").then(x => {
                     $state.go("profileperusahaan");
                 });
             })
         }
+        // $scope.$emit("SendUp", $scope.profile);
     };
     $scope.logout = () => {
         AuthService.logOff();
     }
 }
 
-function dashboardController($scope, DaftarUserServices) {
+function dashboardController($scope, DaftarUserServices, AuthService, helperServices) {
     $scope.datas = [];
     $scope.Title = 'Daftar User';
+    // $scope.$on("SendUp", function (evt, data) {
+    //     $scope.title = data.title;
+    //     $scope.header = data.header;
+    //     $scope.breadcrumb = data.breadcrumb;
+    //     console.log(data);
+    // });
+    $scope.profile = AuthService.getProfile();
     DaftarUserServices.get().then(x => {
         $scope.datas = x;
     });
@@ -62,7 +73,7 @@ function profilePerusahaanController($scope, helperServices, message, AuthServic
         // $scope.model.logoData = photo;
         if ($scope.model.id) {
             ProfilePerusahaanServices.put($scope.model).then(x => {
-                message.dialogconfirm("Profile Perusahaan telah di perbaharui!!! Silahkan Login Ulang untuk melanjutkan", "OK").then(x=>{
+                message.dialogconfirm("Profile Perusahaan telah di perbaharui!!! Silahkan Login Ulang untuk melanjutkan", "OK").then(x => {
                     AuthService.logOff()
                 })
                 // message.info("Berhasil");
@@ -73,7 +84,7 @@ function profilePerusahaanController($scope, helperServices, message, AuthServic
             })
         } else {
             ProfilePerusahaanServices.post($scope.model).then(x => {
-                message.dialogconfirm("Profile Perusahaan telah dibuat!!! Silahkan Login Ulang Untuk Melanjutkan", "OK").then(x=>{
+                message.dialogconfirm("Profile Perusahaan telah dibuat!!! Silahkan Login Ulang Untuk Melanjutkan", "OK").then(x => {
                     AuthService.logOff()
                 })
                 message.info("Berhasil Menyimpan");
@@ -84,7 +95,7 @@ function profilePerusahaanController($scope, helperServices, message, AuthServic
     $scope.edit = () => {
         $scope.statusProfile = false;
     }
-    $scope.showDataLogo = (item)=>{
+    $scope.showDataLogo = (item) => {
         console.log(item);
     }
 }
@@ -100,9 +111,9 @@ function kendaraanController($scope, KendaraanServices, helperServices, message)
     $scope.model.keurDLLAJR = {};
     $scope.model.assdriverIDCard = {};
     $scope.model.driverIDCard = {};
+    $scope.kims = [];
     KendaraanServices.get().then(x => {
         $scope.datas = x;
-        console.log(x);
     })
     $scope.setFile = (item) => {
         console.log(item);
@@ -153,6 +164,11 @@ function kendaraanController($scope, KendaraanServices, helperServices, message)
         $scope.model.carCreated = $scope.model.carCreated.toString();
         console.log($scope.model);
     }
+    $scope.showKims = (item)=>{
+        $scope.kims = item;
+        $("#dataKims").modal('show');
+    }
+    
 }
 
 function pengajuanController($scope, PengajuanServices, message) {
@@ -160,24 +176,38 @@ function pengajuanController($scope, PengajuanServices, message) {
 
     PengajuanServices.get().then(x => {
         $scope.datas = x;
+        console.log(x);
     })
     $scope.deleteItem = (item) => {
-        PengajuanServices.deleted(item).then(result=>{
+        PengajuanServices.deleted(item).then(result => {
             message.info('Berhasil');
         })
     }
+    $scope.checkStatus = (item)=>{
+        var status = true;
+        item.forEach(element => {
+            status = element.status=='Reject' ? false : true;
+        });
+        return status;
+    }
+   
 }
 
-function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state, $stateParams) {
+function tambahPengajuanController($scope, KendaraanServices, helperServices, PengajuanServices, message, $state, $stateParams, ListPemeriksaanServices, approvalServices) {
     $scope.url = helperServices.base;
     $scope.jenisPengajuan = helperServices.jenisPengajuan;
     $scope.id = $stateParams.id;
     $scope.kendaraan = [];
     $scope.model = {};
     $scope.model.items = []
+    $scope.listPemeriksaan = [];
+    $scope.truck = {};
     KendaraanServices.get().then(x => {
+        $scope.$applyAsync(x=>{
+            $(".truck").select2();
+        })
         $scope.kendaraan = x;
-        // console.log(x[0]);
+        console.log(x[0]);
         // var test = atob(x[0].fileAssDriverLicense.data);
         // console.log(test);
         $scope.model.company = { id: $scope.kendaraan[0].companyId };
@@ -193,14 +223,18 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
                 }
                 console.log($scope.model.letterNumber);
             } else {
-                $scope.model = itemPengajuan.find(datapengajuan => datapengajuan.id == $stateParams.id);
+                $scope.model = itemPengajuan
+                ListPemeriksaanServices.get().then(pemeriksaan=>{
+                    $scope.listPemeriksaan = pemeriksaan;
+                })
                 console.log($scope.model);
+                // console.log($scope.model);
             }
         })
     })
     $scope.setItem = (item) => {
         if ($stateParams.id == null) {
-            var itemPengajuan = {truck: item,}
+            var itemPengajuan = { truck: item, }
             $scope.model.items.push(itemPengajuan);
             console.log($scope.model);
         } else {
@@ -230,6 +264,24 @@ function tambahPengajuanController($scope, KendaraanServices, helperServices, Pe
                 $state.go("pengajuan");
             })
         }
+    }
+    $scope.detailPemeriksaan = (item)=>{
+        console.log($scope.listPemeriksaan);
+        console.log(item);
+        $scope.truck = item;
+        $scope.listPemeriksaan.forEach(elementPemeriksaan => {
+            elementPemeriksaan.hasilPemeriksaan = item.hasilPemeriksaan.filter(x=>x.itemPemeriksaan.pemeriksaan.id == elementPemeriksaan.id);              
+        });
+        console.log($scope.listPemeriksaan);
+        $("#showPemeriksaan").modal('show');
+    }
+    $scope.pengajuan=(item)=>{
+        message.dialogmessage("Anda Yakin?", "Ya", "Tidak").then(x=>{
+            approvalServices.post(item).then(res=>{
+                message.info("Berhasil");
+                $state.go("pengajuan");
+            })
+        })
     }
 }
 function kimsController($scope, helperServices) {

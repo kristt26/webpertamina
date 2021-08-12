@@ -1,0 +1,196 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-table mr-1"></i> KIM
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover ; text-justify" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nomor Kim</th>
+                            <th scope="col">Perusahaan</th>
+                            <th scope="col">No. Polisi</th>
+                            <th scope="col">Supir</th>
+                            <th scope="col">Kernet</th>
+                            <th scope="col">Produk</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
+                    <tbody>
+                        <tr ng-repeat="item in datas">
+                            <th scope="row">{{$index+1}}</th>
+                            <td>{{item.kimNumber}}</td>
+                            <td>{{item.truck.company.name}}</td>
+                            <td>{{item.truck.plateNumber}}</td>
+                            <td>{{item.truck.driverName}}</td>
+                            <td>{{item.truck.assdriverName}}</td>
+                            <td>{{item.truck.truckType}}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" ng-click="print(item)"><i class="fa fa-print"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- <?php endforeach; ?> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div id="print">
+    <div class="screen">
+        <div class="col-md-12 border border-kims border-3 px-5 mt-2 mb-2 ml-2 mr-2">
+            <div class="row border-bottom border-kims border-3 mb-3">
+                <div class="col-md-2 d-flex d-flex justify-content-between media">
+                    <img class="align-self-center mr-3" src="/assets/images/Gajah.png" alt="Generic placeholder image" style="width: 70%;">
+                </div>
+                <div class="col-md-8 d-flex justify-content-around d-flex align-items-center">
+                    <H3 class="text-center">KARTU IJIN MASUK (KIM)<BR>MOBIL TANGKI BBM</H3>
+                </div>
+                <div class="col-md-2 d-flex justify-content-around">
+                    <img class="align-self-center mr-3" src="/assets/images/Logo.png" alt="Generic placeholder image" style="width: 100%;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-sm-4">No. Kim</div>
+                    <div class="col-sm-8">: 323156133413</div>
+                    <dl class="row">
+                        <dt class="col-sm-4">No. Kim</dt>
+                        <dd class="col-sm-8">: 323156133413</dd>
+                        <dt class="col-sm-4">Perusahaan</dt>
+                        <dd class="col-sm-8">: CV. OCTAGON CENDRAWASIH SOLUTION</dd>
+                        <dt class="col-sm-4">No. Pol</dt>
+                        <dd class="col-sm-8">: PA 1235 AA</dd>
+                        <dt class="col-sm-4">Nama Supir</dt>
+                        <dd class="col-sm-8">: Bagus Joko Susilo</dd>
+                        <dt class="col-sm-4">Nama Kernet</dt>
+                        <dd class="col-sm-8">: Deni Malik</dd>
+                        <dt class="col-sm-4">Masa Berlaku</dt>
+                        <dd class="col-sm-8">: 20 Agustus 2021 s/d 19 Agustus 2022</dd>
+                    </dl>
+                </div>
+                <div class="col-md-12">
+                    <p>Kartu ini harus selalu dibawa dan diperlihatkan kelada petugas Security dan petugas HSE sebelum memasuki area terbatas di Fuel Terminal Jayapura. Kartu ini sebagai tanda bahwa mobil tangki tersebut memiliki hak dan memenuhi persyaratan untuk memasuki area Fuel Terminal Jayapura</p>
+                </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="card-body table-responsive p-0">
+    <div id="print">
+        <div class="screen">
+            <div class="card border-kims border-3">
+                <div class="card-body">
+                    <table width="100%">
+                        <tr>
+                            <td width="15%">
+                                <center><img src="/assets/images/Gajah.png" width="110px"></center>
+                            </td>
+                            <td width="70%" class="text-center">
+                                <h1
+                                    style="font-size: 45px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                    <strong>KARTU IJIN MASUK (KIM)<BR>MOBIL TANGKI BBM</strong></h1>
+                            </td>
+                            <td width="15%">
+                                <center><img src="/assets/images/pertamina.png" width="110px"></center>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class=" border-bottom border-kims border-3 ml-4 mr-4"></div>
+                <div class="card-body mt-2">
+                    <table width="100%">
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>No.KIM</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.kimNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>Perusahaan</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.truck.company.name}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>No. Pol</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.truck.plateNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>Nama Supir</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.truck.driverName}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>Nama Kernet</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.truck.assdriverName}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>Jenis Produk</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.truck.truckType}}</td>
+                        </tr>
+                        <tr>
+                            <td width="30%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                <strong>Masa Berlaku</strong></td>
+                            <td width="70%"
+                                style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                : {{model.beginDate | date: 'd MMMM y'}} <strong>s/d</strong> {{model.endDate | date: 'd MMMM y'}}</td>
+                        </tr>
+                    </table>
+                    <p class="text-justify mt-2" style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: black; font-style: italic; line-height: normal;"><strong>Kartu ini harus selalu dibawa dan diperlihatkan kelada petugas Security dan petugas HSE sebelum memasuki area terbatas di Fuel Terminal Jayapura. Kartu ini sebagai tanda bahwa mobil tangki tersebut memiliki hak dan memenuhi persyaratan untuk memasuki area Fuel Terminal Jayapura</strong></p>
+                    <!-- <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">&nbsp;</div>
+                            <div class="col-md-6"></div>
+                        </div>
+                    </div> -->
+                    <div class="px-lg-5" style="margin-bottom: -20;">
+                        <div class="row mx-lg-n5" style="margin-bottom: -35px;">
+                            <div class="col py-3 px-lg-5"></div>
+                          <div class="col py-3 px-lg-5"><p style="color: black; font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; line-height:0pt;">Menyetujui, {{tanggalCreate|date:'d MMMM y'}}</p></div>
+                        </div>
+                        <div class="row mx-lg-n5 mb-4">
+                          <div class="col py-3 px-lg-5"></div>
+                          <div class="col py-3 px-lg-5"><p style="color:black; font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Fuel Terminal Manager Jayapura</p></div>
+                        </div>
+                        <br>
+                        <div class="row mx-lg-n5 mt-4">
+                          <div class="col py-3 px-lg-5"></div>
+                          <div class="col py-3 px-lg-5"><h1 style="font-size: 35px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><u>Candra Putra Wijakcana</u></h1></div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

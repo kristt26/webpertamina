@@ -35,9 +35,9 @@
                                     <input type="text" class="form-control" placeholder="Detail Kelengkapan"
                                         aria-label="Detail Kelengkapan" aria-describedby="basic-addon2"
                                         ng-model="item.kelengkapan" disabled>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-warning" type="button"><i class="fa fa-edit"
-                                                ng-click="ubahDetail(item)" data-toggle="modal"
+                                    <div class="input-group-append" ng-click="ubahDetail(item)" >
+                                        <button class="btn btn-warning btn-sm" type="button"><i class="fa fa-edit"
+                                                data-toggle="modal"
                                                 data-target="#additemDetail"></i></button>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="height: 750px;">
                         <table class="table table-hover ; text-justify" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -102,11 +102,13 @@
                                     <td>{{itemDetail.kelengkapan}}</td>
                                     <td>{{itemDetail.penjelasan}}</td>
                                     <td ng-if="$index==0" rowspan="{{item.items.length}}">
-                                        <a class="btn btn-primary btn-sm" ng-show="item.detail"><i
-                                                class="fa fa-eye"></i> </a>
-                                        <a class="btn btn-warning btn-sm" ng-click="ubah(item)"><i
-                                                class="fa fa-edit"></i> </a>
-                                        <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn btn-primary btn-sm" ng-show="item.detail"><i
+                                                    class="fa fa-eye"></i> </a>
+                                            <a class="btn btn-warning btn-sm" ng-click="ubah(item)"><i
+                                                    class="fa fa-edit"></i> </a>
+                                            <a class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 

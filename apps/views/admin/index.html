@@ -28,6 +28,38 @@
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
     <link href="./assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css" rel="stylesheet" />
+    <style>
+        @media screen {
+            #print {
+                /* font-family:verdana, arial, sans-serif; */
+            }
+
+            .screen {
+                display: none;
+            }
+
+            .settt {
+                display: block;
+            }
+        }
+
+        @media print {
+
+            /* #print {font-family:georgia, times, serif;} */
+            .screen {
+                display: block;
+            }
+
+            .settt {
+                display: none;
+            }
+            @page
+            {
+                size: 100mm 100mm;
+                size: portrait;
+            }
+        }
+    </style>
 </head>
 
 <body class="app sidebar-mini">
@@ -35,7 +67,7 @@
     <header class="app-header">
         <a class="app-header__logo" href="index.html"><img src="./assets/images/Logo.png" width="60%" alt=""></a>
         <!-- Sidebar toggle button-->
-        <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+        <!-- <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a> -->
         <!-- Navbar Right Menu-->
         <ul class="app-nav">
             <!-- User Menu-->
@@ -56,7 +88,7 @@
     <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
     <aside class="app-sidebar">
         <div class="app-sidebar__user"><img class="app-sidebar__user-avatar"
-                src="http://192.168.1.12/photos/d0f550ef-0bf9-434b-9055-b2b10a1a53ba.jpg" alt="User Image" width="75px">
+                src="/assets/images/admin.png" alt="User Image" width="75px">
             <div>
                 <p class="app-sidebar__user-name">Administrator</p>
                 <p class="app-sidebar__user-designation">PT. Pertamina</p>
@@ -80,9 +112,11 @@
             <li><a class="app-menu__item" ui-sref="listpemeriksaan"><i
                         class="app-menu__icon fa fa-file-text-o"></i><span class="app-menu__label">List
                         Pemeriksaan</span></a></li>
+            <li><a class="app-menu__item" ui-sref="berkaspengajuan"><i class="app-menu__icon fa fa-file-text-o"></i><span
+                        class="app-menu__label">Berkas Pengajuan</span></a></li>
             <li><a class="app-menu__item" ui-sref="persetujuankim"><i class="app-menu__icon fa fa-file-text-o"></i><span
                         class="app-menu__label">Persetujuan KIM</span></a></li>
-            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-file-text-o"></i><span
+            <li><a class="app-menu__item" ui-sref="kim"><i class="app-menu__icon fa fa-file-text-o"></i><span
                         class="app-menu__label">KIM</span></a></li>
             <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-history"></i><span
                         class="app-menu__label">Histori Truck</span></a></li>

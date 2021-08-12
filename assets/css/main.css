@@ -6804,6 +6804,10 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
   border-color: #009688 !important;
 }
 
+.border-kims {
+  border-color: #2b7bb0 !important;
+}
+
 .border-secondary {
   border-color: #6c757d !important;
 }
@@ -8429,6 +8433,26 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 
 .pl-5, .px-5 {
   padding-left: 3rem !important;
+}
+
+.p-6 {
+  padding: 4rem !important;
+}
+
+.pt-6, .py-6 {
+  padding-top: 4rem !important;
+}
+
+.pr-6, .px-6 {
+  padding-right: 4rem !important;
+}
+
+.pb-6, .py-6 {
+  padding-bottom: 4rem !important;
+}
+
+.pl-6, .px-6 {
+  padding-left: 4rem !important;
 }
 
 .m-n1 {
@@ -15699,4 +15723,8 @@ be a descendant of the grid when it is being dragged.
 
 .user .user-settings label {
   color: #666;
+}
+
+.border-3 {
+  border-width:4px !important;
 }

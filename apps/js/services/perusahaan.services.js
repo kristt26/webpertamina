@@ -218,7 +218,7 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
     service.data = [];
     service.instance = false;
     return {
-        get: get, post: post, put: put, deleted:deleted
+        get: get, post: post, put: put, deleted:deleted,getById: getById
     };
 
     function get() {
@@ -242,6 +242,24 @@ function PengajuanServices($http, $q, helperServices, AuthService, message) {
                 }
             );
         }
+        return def.promise;
+    }
+
+    function getById(id) {
+        var def = $q.defer();
+        $http({
+            method: 'get',
+            url: controller + "/submission/"+id,
+            headers: AuthService.getHeader()
+        }).then(
+            (res) => {
+                def.resolve(res.data);
+            },
+            (err) => {
+                message.error(err.data);
+                def.reject(err.data);
+            }
+        );
         return def.promise;
     }
 

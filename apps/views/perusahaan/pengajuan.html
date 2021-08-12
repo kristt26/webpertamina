@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover ; text-justify" datatable="ng" width="100%" cellspacing="0">
+                <table class="table table-hover ; text-justify" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -24,16 +24,26 @@
                     </thead>
                     <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
                     <tbody>
-                        <tr ng-repeat="item in datas">
+                        <tr ng-repeat="item in datas"
+                            ng-class="{'bg-primary': item.statusPengajuan=='Proccess' && checkStatus(item.items)==true, 
+                            'bg-warning': item.statusPengajuan=='Proccess'  && !checkStatus(item.items), 
+                            'bg-success': item.statusPengajuan=='Complete'  && checkStatus(item.items)==true}">
                             <td scope="row">{{$index+1}}</td>
                             <td>{{item.letterNumber}}</td>
                             <td>{{item.created | date: 'EEEE, d MMMM y'}}</td>
-                            <td>{{item.statusPengajuan}}</td>
-                            <td width="15%">
-                                <a class="btn btn-info btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i class="fa fa-eye"></i> </a>
-                                <!-- <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
+                            <td>{{checkStatus(item.items)?item.statusPengajuan : 'Reject'}}</td>
+                            <td width="20%">
+                                <div class="d-flex justify-content-center">
+                                    <a class="btn btn-info btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
+                                            class="fa fa-eye"></i> </a>
+                                    <!-- <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
                                         class="fa fa-edit"></i> </a> -->
-                                <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-danger btn-sm " ng-click="deleteItem(item)"><i
+                                            class="fa fa-trash"></i></a>
+                                    <!-- <a class="btn btn-warning btn-sm" ui-sref="tambahpengajuan({ id: item.id })"><i
+                                            class="fa fa-edit"></i> </a> -->
+
+                                </div>
                             </td>
                         </tr>
                     </tbody>

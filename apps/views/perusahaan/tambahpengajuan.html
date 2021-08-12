@@ -21,11 +21,10 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-4 col-form-label">No Surat</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" readonly ng-model="model.letterNumber"
-                                    id="inputEmail3" required placeholder="Nomor Polisi">
+                                <input type="text" class="form-control" ng-model="model.letterNumber"
+                                    id="inputEmail3" required placeholder="Nomor Surat">
                             </div>
                         </div>
-
                     </div>
                     <div class="col-md-2">
                         &nbsp;
@@ -64,11 +63,12 @@
                                     <th>Berkas Supir</th>
                                     <th>Berkas Kernet</th>
                                     <th>Jenis Pengajuan</th>
-                                    <!-- <th><i class="fa fa-gear"></i></th> -->
+                                    <th>Status</th>
+                                    <th><i class="fa fa-gear"></i></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in model.items" ng-if="model.id">
+                                <tr ng-repeat="item in model.items" ng-if="model.id" ng-class="{'bg-warning': item.status == 'Reject'}">
                                     <td>{{$index+1}}</td>
                                     <td>{{item.truck.plateNumber}}</td>
                                     <td>{{item.truck.driverName}}</td>
@@ -100,9 +100,16 @@
                                         </ol>
                                     </td>
                                     <td>{{item.attackStatus}}</td>
+                                    <td>{{item.status}}</td>
                                     <td>
-                                        <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
-                                                class="fa fa-trash-o"></i></a>
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn btn-danger btn-sm" ng-click="deleteItem(item)"><i
+                                                    class="fa fa-trash-o"></i></a>
+                                            <a class="btn btn-info btn-sm" ng-click="detailPemeriksaan(item)"><i
+                                                    class="fa fa-eye"></i></a>
+                                            <a class="btn btn-primary btn-sm" ng-click="pengajuan(item)"><i
+                                                    class="fa fa-floppy-o"></i></a>
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr ng-repeat="item in model.items" ng-if="!model.id">
@@ -171,7 +178,7 @@
                 <div class="form-group">
                     <label for="iduser" class="control-label">Truk</label>
                     <div class="input-group mb-3">
-                        <select class="select2bs4" name="state"
+                        <select class="truck" name="state" style="width: 100%;"
                             ng-options="item as item.plateNumber for item in kendaraan" ng-model="itemkendaraan">
                         </select>
                     </div>
@@ -188,6 +195,136 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clear()">Close</button>
                 <button type="button" class="btn btn-info" ng-click="setItem(itemkendaraan)"
                     data-dismiss="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showPemeriksaan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #3c454d; color: #fff;">
+                <h5 class="modal-title" id="exampleModalLongTitle">Daftar KIM</h5>
+                <button type="button" class="close" style="color: #3c454d" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="row">
+                        <table width="99%">
+                            <tr>
+                                <td width="75%" class="text-center">
+                                    <h4>PT. PERTAMINA (PERSERO) MOR VIII FT JAYAPURA
+                                        <BR> PEMERIKSAAN MOBIL TANGKI BAHAN BAKAR MINYAK
+                                    </h4>
+                                </td>
+                                <td width="25%" class="text-center"><img src="assets/images/Logo.png" style="width: 90%;"
+                                        alt=""></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <hr size="10px">
+                    <div class="row">
+                        <table width="99%">
+                            <tr>
+                                <td width="15%">Nama Perusahaan</td>
+                                <td width="20%">: {{model.company.name}}</td>
+                                <td width="30%"></td>
+                                <td width="15%">Nomor Polisi</td>
+                                <td width="20%">: {{truck.truck.plateNumber}}</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">Nama Supir</td>
+                                <td width="20%">: {{truck.truck.driverName}}</td>
+                                <td width="30%"></td>
+                                <td width="15%">Merek/Tahun</td>
+                                <td width="20%">: {{truck.truck.merk}}</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">Nama Kernet</td>
+                                <td width="20%">: {{truck.truck.assdriverName}}</td>
+                                <td width="30%"></td>
+                                <td width="15%">Jenis Produk</td>
+                                <td width="20%">: {{truck.truck.truckType}}</td>
+                            </tr>
+                            <tr>
+                                <td width="15%">Sim</td>
+                                <td width="20%">: {{truck.truck.driverLicense.number}}</td>
+                                <td width="30%"></td>
+                                <td width="15%">Kapasitas</td>
+                                <td width="20%">: {{truck.truck.capacity}} Ltr</td>
+                            </tr>
+    
+                        </table>
+                    </div>
+                </div>
+                <table class="table-resvonsive" width="100%" border="1">
+                    <thead>
+                        <tr>
+                            <!-- <th>No</th> -->
+                            <th colspan="2">Kelengkapan</th>
+                            <th>Penjelasan</th>
+                            <th>Hasil</th>
+                            <th>Keterangan</th>
+                            <th>Tindak Lanjut</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="item in listPemeriksaan">
+                        <!-- <tr ng-hide="true">{{$index}}</tr> -->
+                        <tr ng-repeat="pemeriksaan in item.hasilPemeriksaan">
+                            <!-- <td>{{$index+1}}</td> -->
+                            <td ng-if="item.hasilPemeriksaan.length==1" colspan="2">{{item.name}}</td>
+                            <td ng-if="item.hasilPemeriksaan.length>1 && $index==0" rowspan="{{item.hasilPemeriksaan.length}}">{{item.name}}</td>
+                            <td ng-if="item.hasilPemeriksaan.length>1">{{pemeriksaan.itemPemeriksaan.kelengkapan}}</td>
+                            <td class="text-wrap" width="30%">{{pemeriksaan.itemPemeriksaan.penjelasan}}</td>
+                            <td>{{pemeriksaan.hasil==true?'Baik': 'Rusak'}}</td>
+                            <td>{{pemeriksaan.keterangan}}</td>
+                            <td>{{pemeriksaan.tindakLanjut}}</td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" rowspan="4" class="align-self-start"><p>Kesimpulan:</p></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Diperiksa Pertama Tanggal <strong>1 Juli 2021</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Diperiksa Kedua Tanggal <strong>1 Juli 2021</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Diperiksa Ketiga Tanggal <strong>1 Juli 2021</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table class="table-resvonsive; text-justify" width="100%">
+                    <thead>
+                        <tr>
+                            <td>Approval 1</td>
+                            <td>HSE</td>
+                            <td>Disahkan oleh: <br>Manager</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td height="100"></td>
+                            <td height="100"></td>
+                            <td height="100"></td>
+                        </tr>
+    
+                        <tr>
+                            <td>......................................................</td>
+                            <td>......................................................</td>
+                            <td>......................................................</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="clear()">Close</button>
             </div>
         </div>
     </div>

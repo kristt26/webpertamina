@@ -7,11 +7,11 @@ function LoginController($scope, $state, AuthService) {
   $scope.login = (user) => {
     AuthService.login(user).then(x => {
       if (x.roles[0] == "Company") {
-        $state.go("perusahaan");
+        $state.go("dashboard");
       } else if(x.roles[0] == "Approval1"){
         $state.go("approval");
       } else {
-        $state.go("index");
+        $state.go("home");
       }
     })
   }
