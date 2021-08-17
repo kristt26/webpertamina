@@ -14424,7 +14424,7 @@ be a descendant of the grid when it is being dragged.
 
 .btn .icon, .btn .fa {
   font-size: 14px;
-  margin-right: 5px;
+  margin-right: 0px;
   vertical-align: middle;
 }
 

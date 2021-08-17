@@ -177,7 +177,7 @@ function ListPemeriksaanServices($http, $q, StorageService, $state, helperServic
         var def = $q.defer();
         $http({
             method: 'put',
-            url: controller + '?id=' + params.id,
+            url: controller + '/' + params.id,
             data: params,
             headers: AuthService.getHeader()
         }).then(

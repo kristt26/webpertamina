@@ -1,0 +1,476 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-home fa-lg"></i></a></li>
+    <li class="breadcrumb-item"><a ui-sref="berkaspengajuan">{{breadcrumb}}</a></li>
+    <li class="breadcrumb-item" ng-if="detailbreadcrumb"><a href="">{{detailbreadcrumb}}</a></li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-files-o mr-1"></i> Pemeriksaan Berkas Pengajuan
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered ; text-justify" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th scope="col" width="25%">Berkas</th>
+                        <th scope="col">Nomor</th>
+                        <th scope="col">Masa Berlaku</th>
+                        <th scope="col" width="20%">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">KTP</th>
+                        <td>{{model.truck.driverIDCard.number}}</td>
+                        <td>{{model.truck.driverIDCard.berlaku | date:'d MMMM y'}} s/d {{model.truck.driverIDCard.hingga
+                            | date:'d MMMM y'}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                ng-click="detail(item, setItem = 'KTP')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <!-- <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='KTP')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Photo</th>
+                        <td></td>
+                        <td></td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                ng-click="detail(item, setItem = 'Photo')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <!-- <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='Photo')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">SIM</th>
+                        <td>{{model.truck.driverLicense.number}}</td>
+                        <td>{{model.truck.driverLicense.berlaku | date:'d MMMM y'}} s/d
+                            {{model.truck.driverLicense.hingga | date:'d MMMM y'}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                ng-click="detail(item, setItem = 'SIM')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='SIM')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">KEURDLLAJR</th>
+                        <td>{{model.truck.keurDLLAJR.number}}</td>
+                        <td>{{model.truck.keurDLLAJR.berlaku | date:'d MMMM y'}} s/d {{model.truck.keurDLLAJR.hingga |
+                            date:'d MMMM y'}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                ng-click="detail(stnk, setItem = 'KEURDLLAJR')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm"
+                                ng-click="validate(setItem='KEURDLLAJR')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">STNK</th>
+                        <td>{{model.truck.keurDLLAJR.number}}</td>
+                        <td>{{model.truck.keurDLLAJR.berlaku | date:'d MMMM y'}} s/d {{model.truck.keurDLLAJR.hingga |
+                            date:'d MMMM y'}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                ng-click="detail(item, setItem = 'STNK')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='STNK')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <th scope="row">KIR</th>
+                        <td>{{model.truck.vehicleRegistration.number}}</td>
+                        <td>{{model.truck.vehicleRegistration.berlaku | date:'d MMMM y'}} s/d
+                            {{model.truck.vehicleRegistration.hingga | date:'d MMMM y'}}</td>
+                        <td class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-info btn-sm mr-1" ng-click="detail(item, setItem = 'KIR')">
+                                <i class="fa fa-file" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+            <!-- <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                data-target="#driver" aria-expanded="true" aria-controls="driver">
+                                {{model.truck.driverName}} (DRIVER)
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="driver" class="collapse show" aria-labelledby="headingOne"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered ; text-justify" id="dataTable" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="25%">Berkas</th>
+                                            <th scope="col">Nomor</th>
+                                            <th scope="col">Masa Berlaku</th>
+                                            <th scope="col" width="20%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">KTP</th>
+                                            <td>{{model.truck.driverIDCard.number}}</td>
+                                            <td>{{model.truck.driverIDCard.berlaku | date:'d MMMM y'}} s/d {{model.truck.driverIDCard.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">SIM</th>
+                                            <td>{{model.truck.driverLicense.number}}</td>
+                                            <td>{{model.truck.driverLicense.berlaku | date:'d MMMM y'}} s/d {{model.truck.driverLicense.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Photo</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                data-toggle="collapse" data-target="#kernet" aria-expanded="false"
+                                aria-controls="kernet">
+                                {{model.truck.assdriverName}} (Assitent Driver)
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="kernet" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered ; text-justify" id="dataTable" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="25%">Berkas</th>
+                                            <th scope="col">Nomor</th>
+                                            <th scope="col">Masa Berlaku</th>
+                                            <th scope="col" width="20%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">KTP</th>
+                                            <td>{{model.truck.assdriverIDCard.number}}</td>
+                                            <td>{{model.truck.assdriverIDCard.berlaku | date:'d MMMM y'}} s/d {{model.truck.assdriverIDCard.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">SIM</th>
+                                            <td>{{model.truck.assdriverLicense.number}}</td>
+                                            <td>{{model.truck.assdriverLicense.berlaku | date:'d MMMM y'}} s/d {{model.truck.assdriverLicense.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Photo</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button"
+                                data-toggle="collapse" data-target="#kendaraan" aria-expanded="false"
+                                aria-controls="kendaraan">
+                                Berkas Truck
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="kendaraan" class="collapse" aria-labelledby="headingThree"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered ; text-justify" id="dataTable" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" width="25%">Berkas</th>
+                                            <th scope="col">Nomor</th>
+                                            <th scope="col">Masa Berlaku</th>
+                                            <th scope="col" width="20%">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">KEURDLLAJR</th>
+                                            <td>{{model.truck.keurDLLAJR.number}}</td>
+                                            <td>{{model.truck.keurDLLAJR.berlaku | date:'d MMMM y'}} s/d {{model.truck.keurDLLAJR.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="detail(stnk)">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">STNK</th>
+                                            <td>{{model.truck.keurDLLAJR.number}}</td>
+                                            <td>{{model.truck.keurDLLAJR.berlaku | date:'d MMMM y'}} s/d {{model.truck.keurDLLAJR.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="detail(stnk)">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">KIR</th>
+                                            <td>{{model.truck.vehicleRegistration.number}}</td>
+                                            <td>{{model.truck.vehicleRegistration.berlaku | date:'d MMMM y'}} s/d {{model.truck.vehicleRegistration.hingga | date:'d MMMM y'}}</td>
+                                            <td class="d-flex justify-content-center">
+                                                <button type="button" class="btn btn-info btn-sm mr-1" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-file" aria-hidden="true"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning btn-sm" ng-click="validate(setItem='')">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-primary pull-right" ng-click="Proses()">Validate</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="detailKtp" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Berkas {{setItem}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="height: 90vh;">
+                <div class="form-group" ng-if="setKtpDriver">
+                    <label class="control-label">KTP DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setKtpDriver=='pdf'" type="application/pdf" data="{{ktpDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setKtpDriver !='pdf'">
+                            <img ng-src="{{ktpDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setAssKtpDriver">
+                    <label class="control-label">KTP Assistant DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setAssKtpDriver=='pdf'" type="application/pdf" data="{{ktpAssDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setAssKtpDriver !='pdf'">
+                            <img ng-src="{{ktpAssDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setSimDriver">
+                    <label class="control-label">SIM DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setSimDriver=='pdf'" type="application/pdf" data="{{simDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setSimDriver !='pdf'">
+                            <img ng-src="{{simDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setAssSimDriver">
+                    <label class="control-label">SIM Assistant DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setAssSimDriver=='pdf'" type="application/pdf" data="{{simAssDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setAssSimDriver !='pdf'">
+                            <img ng-src="{{simAssDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setPhotoDriver">
+                    <label class="control-label">Photo DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setPhotoDriver=='pdf'" type="application/pdf" data="{{photoDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setPhotoDriver !='pdf'">
+                            <img ng-src="{{photoDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setAssPhotoDriver">
+                    <label class="control-label">Photo Assistant DRIVER</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setAssPhotoDriver=='pdf'" type="application/pdf" data="{{photoAssDriver}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setAssPhotoDriver !='pdf'">
+                            <img ng-src="{{photoAssDriver}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setKeurdllajr">
+                    <label class="control-label">KEURDLLAJR</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setKeurdllajr=='pdf'" type="application/pdf" data="{{keurdllajr}}"
+                            style="height:500px" width="100%"></object>
+                        <div ng-if="setKeurdllajr !='pdf'">
+                            <img ng-src="{{keurdllajr}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-if="setStnk">
+                    <label class="control-label">STNK</label>
+                    <div class="input-group mb-3">
+                        <object ng-if="setStnk=='pdf'" type="application/pdf" data="{{stnk}}" style="height:500px"
+                            width="100%"></object>
+                        <div ng-if="setStnk !='pdf'">
+                            <img ng-src="{{stnk}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showValid" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Berkas {{setItem}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label class="control-label col-md-3">Hasil</label>
+                    <div class="col-md-8">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="hasil" value="true" ng-model="itemBerkas.hasil">Baik
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="hasil" value="false" ng-model="itemBerkas.hasil">Buruk
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-3">Keterangan</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="4" placeholder="Masukkan Keterangan" ng-model="itemBerkas.keterangan"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-md-3">Tindak Lanjut</label>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="4" placeholder="Masukkan Tindak Lanjut" ng-model="itemBerkas.tindaklanjut"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a ui-sref="home"><i class="fa fa-home fa-lg"></i></a></li>
+    <li class="breadcrumb-item"><a href="#">{{breadcrumb}}</a></li>
+    <li class="breadcrumb-item" ng-if="detailbreadcrumb"><a href="">{{detailbreadcrumb}}</a></li>
+</ol>
+<div class="container-fluid">
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-table mr-1"></i> Daftar Persetujuan KIM
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered ; text-justify" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Perusahaan</th>
+                            <th scope="col">No. Polisi</th>
+                            <th scope="col">Tanggal Persetujuan</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <!-- <?php foreach ($kategorikbli as $key => $value) : ?> -->
+                    <tbody>
+                        <tr ng-repeat="item in datas">
+                            <th scope="row">
+                                {{$index+1}}
+                            </th>
+                            <td>{{item.pengajuan.company.name}}</td>
+                            <td>{{item.truck.plateNumber}}</td>
+                            <td>{{item.pengajuan.created | date: 'd MMMM y'}}</td>
+                            <td>{{item.status}}</td>
+                            <td>
+                                <a ui-sref="detailberkas({ id: item.id })" class="btn btn-primary" >Periksa</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- <?php endforeach; ?> -->
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Buat KIM/Perpanjangan KIM</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="save(model)">
+                    <div class="form-group row">
+                        <label for="nokim" class="col-sm-4 col-form-label">No KIM</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="nokim" ng-model="model.kimNumber"
+                                placeholder="No KIM" required>
+                        </div>
+                    </div>
+                    <fieldset disabled>
+                        <div class="form-group row">
+                            <label for="perusahaan" class="col-sm-4 col-form-label">Nama Perusahaan</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="perusahaan"
+                                    ng-model="model.truck.company.name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nopolisi" class="col-sm-4 col-form-label">No. Polisi</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="nopolisi" class="form-control"
+                                    ng-model="model.truck.plateNumber">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="supir" class="col-sm-4 col-form-label">Nama Supir</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="supir" class="form-control" ng-model="model.truck.driverName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kernet" class="col-sm-4 col-form-label">Nama Kernet</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="kernet" class="form-control"
+                                    ng-model="model.truck.assdriverName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="jenisproduk" class="col-sm-4 col-form-label">Jenis Produk</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="jenisproduk" class="form-control"
+                                    ng-model="model.truck.truckType">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group row">
+                        <div class="input-group mb-3">
+                            <label for="beginDate" class="col-sm-4 col-form-label">Tanggal Berlaku</label>
+                            <div class="col-sm-8">
+                                <datepicker date-format="yyyy-MM-dd">
+                                    <!-- <input ng-model="date" type="text"/> -->
+                                    <input type="text" class="form-control" id="beginDate" ng-model="model.beginDate"
+                                        required>
+                                </datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="input-group mb-3">
+                            <label for="endDate" class="col-sm-4 col-form-label">Tanggal Berakhir</label>
+                            <div class="col-sm-8">
+                                <datepicker date-format="yyyy-MM-dd">
+                                    <!-- <input ng-model="date" type="text"/> -->
+                                    <input type="text" class="form-control" ng-model="model.endDate" id="endDate"
+                                        required>
+                                </datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

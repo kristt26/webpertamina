@@ -68,6 +68,19 @@ angular.module("app.router", ["ui.router"])
                 templateUrl: 'apps/views/admin/berkasPengajuan.html'
             })
 
+            .state("detailberkas", {
+                url: '/detailberkas/:id',
+                params: {
+                    id: {
+                        value: null,
+                        squash: false,
+                    }
+                },
+                parent: 'index',
+                controller: "adminBerkasPengajuanController",
+                templateUrl: 'apps/views/admin/detailBerkas.html'
+            })
+
             .state("persetujuankim", {
                 url: '/persetujuankim',
                 parent: 'index',
